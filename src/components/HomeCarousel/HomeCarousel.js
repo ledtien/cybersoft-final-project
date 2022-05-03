@@ -1,6 +1,8 @@
 import React from "react";
 import { Carousel } from "antd";
 import "./HomeCarousel.css";
+import { SearchOutlined } from "@ant-design/icons";
+import { Input } from "antd";
 
 export default function HomeCarousel() {
   const heroImg = [
@@ -40,9 +42,9 @@ export default function HomeCarousel() {
     height: "680px",
     color: "#fff",
     background: "#364d79",
-    backgroundSize: "cover",
+    backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "bottom",
+    backgroundPosition: "center",
   };
 
   return (
@@ -56,8 +58,69 @@ export default function HomeCarousel() {
                 backgroundImage: `url(${hero.heroImg})`,
               }}
             >
-              <div className="container px-12 mx-auto flex justify-end items-end h-full pb-10">
-                <div className="text-lg">
+              <div className="container px-12 mx-auto h-full pb-10 relative">
+                <div
+                  style={{ maxWidth: "650px", height: "100%" }}
+                  className="flex flex-col justify-center"
+                >
+                  <div>
+                    <h1
+                      className="text-5xl text-white"
+                      style={{ lineHeight: "56px", fontWeight: "700" }}
+                    >
+                      Find the perfect <i>freelance</i> services for your
+                      business
+                    </h1>
+                  </div>
+                  <form>
+                    <Input
+                      style={{
+                        width: "80%",
+                        padding: "10.5px 0px",
+                        borderRadius: "2px 0px 0px 2px",
+                      }}
+                      size="large"
+                      placeholder={`Try "building mobile app"`}
+                      prefix={<SearchOutlined className="ml-5" />}
+                    />
+                    <button
+                      className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600"
+                      style={{ padding: "10px 20px" }}
+                    >
+                      Search
+                    </button>
+                  </form>
+                  <div className="pt-6 text-sm font-semibold">
+                    <p>
+                      Popular:{" "}
+                      <span
+                        className="ml-2 mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                        style={{ border: "1px solid #fff", fontSize: "14px" }}
+                      >
+                        Website Design
+                      </span>
+                      <span
+                        className="mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                        style={{ border: "1px solid #fff", fontSize: "14px" }}
+                      >
+                        Word Press
+                      </span>
+                      <span
+                        className="mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                        style={{ border: "1px solid #fff", fontSize: "14px" }}
+                      >
+                        Logo Design
+                      </span>
+                      <span
+                        className="mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                        style={{ border: "1px solid #fff", fontSize: "14px" }}
+                      >
+                        NFT Art
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div className="text-lg absolute bottom-7 right-7">
                   {hero.heroName === "Gabrielle" ? (
                     <img
                       src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/five_stars.e5c37f5.svg"
