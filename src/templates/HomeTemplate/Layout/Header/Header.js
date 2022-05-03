@@ -5,9 +5,13 @@ import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
 import { TOKEN, USER_LOGIN } from "../../../../utils/settings/config";
 import headerStyle from "./Header.module.css";
+import { SearchOutlined } from "@ant-design/icons";
+import { Input } from "antd";
+import { Menu, Dropdown, Space } from "antd";
 
 export default function Header(props) {
   const [navbar, setNavbar] = useState(false);
+  const [navbarSecond, setNavbarSecond] = useState(false);
 
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
@@ -17,6 +21,12 @@ export default function Header(props) {
       setNavbar(true);
     } else {
       setNavbar(false);
+    }
+
+    if (window.scrollY >= 160) {
+      setNavbarSecond(true);
+    } else {
+      setNavbarSecond(false);
     }
   };
 
@@ -68,6 +78,16 @@ export default function Header(props) {
       </Fragment>
     );
   };
+
+  const menu = (
+    <Menu style={{ marginTop: "3px" }}>
+      <Menu.Item>item 1</Menu.Item>
+      <Menu.Item>item 2</Menu.Item>
+      <Menu.SubMenu title="sub menu">
+        <Menu.Item>item 3</Menu.Item>
+      </Menu.SubMenu>
+    </Menu>
+  );
   return (
     <header
       className={
@@ -80,7 +100,7 @@ export default function Header(props) {
         <a
           href="/"
           aria-label="Back to homepage"
-          className="flex items-center p-2 "
+          className="flex items-center "
         >
           <svg
             width="89"
@@ -97,6 +117,26 @@ export default function Header(props) {
             </g>
           </svg>
         </a>
+        <form
+          className={
+            navbarSecond
+              ? `flex justify-start items-center ml-5 transition duration-150 ease-in opacity-100 `
+              : `justify-start items-center ml-5  opacity-0 cursor-auto`
+          }
+          style={{ width: "400px" }}
+        >
+          <Input
+            size="medium"
+            placeholder={`Try "building mobile app"`}
+            prefix={<SearchOutlined />}
+          />
+          <button
+            className="bg-green-500 rounded-r-sm text-sm font-semibold text-white transition duration-150 ease-in hover:bg-green-600"
+            style={{ padding: "6px 10px" }}
+          >
+            Search
+          </button>
+        </form>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <NavLink
             to="/"
@@ -122,6 +162,35 @@ export default function Header(props) {
           {renderLogin()}
         </div>
       </div>
+      {navbarSecond ? (
+        <div
+          className="bg-white fixed w-full h-10 flex justify-center items-center transition-all duration-150 ease-in translate-y-0"
+          style={{ borderTop: "1px solid #e4e5e7" }}
+        >
+          <div className="container flex items-center px-12 mx-auto">
+            <div className={`flex ${headerStyle.secondNavbarLine}`}>
+              <Dropdown overlay={menu}>
+                <div className={` mr-10`} onClick={(e) => e.preventDefault()}>
+                  <Space className={`${headerStyle.secondNavbarLine}`}>
+                    Hover me
+                  </Space>
+                </div>
+              </Dropdown>
+            </div>
+            <div className={`flex ${headerStyle.secondNavbarLine}`}>
+              <Dropdown overlay={menu}>
+                <div className={` mr-10`} onClick={(e) => e.preventDefault()}>
+                  <Space className={`${headerStyle.secondNavbarLine}`}>
+                    Hover me
+                  </Space>
+                </div>
+              </Dropdown>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </header>
   );
 }
