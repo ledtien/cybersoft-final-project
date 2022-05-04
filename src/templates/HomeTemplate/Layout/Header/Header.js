@@ -19,9 +19,7 @@ export default function Header(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTypeJobsAction());
-  }, []);
-
-  console.log({ typeJobs });
+  }, [dispatch]);
 
   const changeNavbarBg = () => {
     if (window.scrollY >= 80) {
