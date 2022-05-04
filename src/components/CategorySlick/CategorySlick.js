@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
+import { getSubTypeJobsAction } from "../../redux/actions/SubTypeJobsAction";
 import styleSlick from "./CategorySlick.module.css";
 
 export default function CategorySlick() {
+  const { subTypeJobs } = useSelector((state) => state.SubTypeJobsReducer);
+  console.log(subTypeJobs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSubTypeJobsAction());
+  }, [dispatch]);
+
   const SampleNextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -65,51 +74,40 @@ export default function CategorySlick() {
   };
 
   return (
-    <div className="mt-24">
+    <div className="py-24">
       <div className="container px-12 mx-auto  ">
         <h2 className="pb-12 text-3xl font-bold text-gray-700">
           {" "}
           Popular professional services{" "}
         </h2>
         <Slider {...settings}>
-          <div>
-            <div style={{ height: "345px", position: "relative" }}>
-              <a href="/" className="">
-                <h4 className="z-10 relative p-6 text-white text-2xl font-bold">
-                  <small className="block text-sm font-normal">
-                    Build your Brand
-                  </small>
-                  Logo Design
-                </h4>
-                <img
-                  alt="Logo Design"
-                  src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_550,dpr_1.0/v1/attachments/generic_asset/asset/055f758c1f5b3a1ab38c047dce553860-1598561741678/logo-design-2x.png"
-                  className="absolute top-0 bottom-0 left-0 right-0 rounded-sm h-full"
-                />
-              </a>
-            </div>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
+          {subTypeJobs?.slice(0, 20).map((subJob, index) => {
+            if (subJob.image) {
+              return (
+                <div className="px-3" key={index}>
+                  <div
+                    style={{ height: "345px", position: "relative" }}
+                    key={index}
+                  >
+                    <a href="/" className="">
+                      <h4 className="z-10 relative p-6 text-white text-2xl font-bold">
+                        <small className="block text-sm font-normal">
+                          Build your Brand
+                        </small>
+                        {subJob.name}
+                      </h4>
+                      <img
+                        alt="Logo Design"
+                        src={subJob.image}
+                        className="absolute top-0 bottom-0 left-0 right-0 rounded-sm h-full"
+                      />
+                    </a>
+                  </div>
+                </div>
+              );
+            }
+            return "";
+          })}
         </Slider>
       </div>
     </div>
