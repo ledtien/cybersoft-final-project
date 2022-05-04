@@ -1,6 +1,5 @@
 import _ from "lodash";
-import React, { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
 import { TOKEN, USER_LOGIN } from "../../../../utils/settings/config";
@@ -8,15 +7,23 @@ import headerStyle from "./Header.module.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { Menu, Dropdown, Space } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
+import { type } from "@testing-library/user-event/dist/type";
 
 export default function Header(props) {
   const [navbar, setNavbar] = useState(false);
   const [navbarSecond, setNavbarSecond] = useState(false);
+  const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
 
-  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTypeJobsAction());
+  }, []);
+
+  console.log({ typeJobs });
 
   const changeNavbarBg = () => {
-    console.log(window.scrollY);
     if (window.scrollY >= 80) {
       setNavbar(true);
     } else {
@@ -33,61 +40,50 @@ export default function Header(props) {
   window.addEventListener("scroll", changeNavbarBg);
 
   const renderLogin = () => {
-    if (_.isEmpty(userLogin)) {
-      return (
-        <Fragment>
-          <button
-            className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
-            onClick={() => props.history.push("/login")}
-          >
-            Sign in
-          </button>
-          <button
-            className={
-              navbar
-                ? `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
-                : `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-white`
-            }
-            onClick={() => props.history.push("/register")}
-          >
-            Join
-          </button>
-        </Fragment>
-      );
-    }
-
     return (
       <Fragment>
         <button
-          className="self-center py-3 rounded"
-          onClick={() => props.history.push("/profile")}
+          className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
+          onClick={() => props.history.push("/login")}
         >
-          Hello {userLogin.taiKhoan}
-        </button>{" "}
+          Sign in
+        </button>
         <button
-          className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
-          onClick={() => {
-            localStorage.removeItem(USER_LOGIN);
-            localStorage.removeItem(TOKEN);
-            history.push("/");
-            window.location.reload();
-          }}
+          className={
+            navbar
+              ? `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
+              : `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-white`
+          }
+          onClick={() => props.history.push("/register")}
         >
-          LOG-OUT
+          Join
         </button>
       </Fragment>
     );
+
+    // return (
+    //   <Fragment>
+    //     <button
+    //       className="self-center py-3 rounded"
+    //       onClick={() => props.history.push("/profile")}
+    //     >
+    //       Hello {userLogin.taiKhoan}
+    //     </button>{" "}
+    //     <button
+    //       className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
+    //       onClick={() => {
+    //         localStorage.removeItem(USER_LOGIN);
+    //         localStorage.removeItem(TOKEN);
+    //         history.push("/");
+    //         window.location.reload();
+    //       }}
+    //     >
+    //       LOG-OUT
+    //     </button>
+    //   </Fragment>
+    // );
   };
 
-  const menu = (
-    <Menu style={{ marginTop: "3px" }}>
-      <Menu.Item>item 1</Menu.Item>
-      <Menu.Item>item 2</Menu.Item>
-      <Menu.SubMenu title="sub menu">
-        <Menu.Item>item 3</Menu.Item>
-      </Menu.SubMenu>
-    </Menu>
-  );
   return (
     <header
       className={
@@ -137,7 +133,7 @@ export default function Header(props) {
             Search
           </button>
         </form>
-        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <NavLink
             to="/"
             className={
@@ -167,25 +163,39 @@ export default function Header(props) {
           className="bg-white fixed w-full h-10 flex justify-center items-center transition-all duration-150 ease-in translate-y-0"
           style={{ borderTop: "1px solid #e4e5e7" }}
         >
-          <div className="container flex items-center px-12 mx-auto">
-            <div className={`flex ${headerStyle.secondNavbarLine}`}>
-              <Dropdown overlay={menu}>
-                <div className={` mr-10`} onClick={(e) => e.preventDefault()}>
-                  <Space className={`${headerStyle.secondNavbarLine}`}>
-                    Hover me
-                  </Space>
+          <div className="container flex items-center px-12 mx-auto justify-between">
+            {typeJobs?.slice(0, 9).map((job, index) => {
+              return (
+                <div className={` ${headerStyle.secondNavbarLine}`} key={index}>
+                  <Dropdown
+                    overlay={() => {
+                      return (
+                        <Menu
+                          style={{
+                            marginTop: "3px",
+                          }}
+                        >
+                          {job.subTypeJobs.map((sub, index) => {
+                            return (
+                              <Menu.Item key={index}>{sub.name}</Menu.Item>
+                            );
+                          })}
+                        </Menu>
+                      );
+                    }}
+                  >
+                    <div className={``} onClick={(e) => e.preventDefault()}>
+                      <div
+                        className={`${headerStyle.secondNavbarLine}`}
+                        style={{ lineHeight: "inherit" }}
+                      >
+                        {job.name}
+                      </div>
+                    </div>
+                  </Dropdown>
                 </div>
-              </Dropdown>
-            </div>
-            <div className={`flex ${headerStyle.secondNavbarLine}`}>
-              <Dropdown overlay={menu}>
-                <div className={` mr-10`} onClick={(e) => e.preventDefault()}>
-                  <Space className={`${headerStyle.secondNavbarLine}`}>
-                    Hover me
-                  </Space>
-                </div>
-              </Dropdown>
-            </div>
+              );
+            })}
           </div>
         </div>
       ) : (
