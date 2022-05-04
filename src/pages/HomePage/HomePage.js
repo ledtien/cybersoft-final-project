@@ -3,6 +3,8 @@ import CategorySlick from "../../components/CategorySlick/CategorySlick";
 import HomeCarousel from "../../components/HomeCarousel/HomeCarousel";
 import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import CustomerSlick from "../../components/CustomerSlick/CustomerSlick";
+import MainCategory from "../../components/MainCategory/MainCategory";
 
 export default function HomePage() {
   return (
@@ -58,7 +60,7 @@ export default function HomePage() {
       <div style={{ backgroundColor: "#f1fdf7" }} className="py-24">
         <div className="grid grid-cols-2 px-12 container mx-auto items-center">
           <div className=" pr-40">
-            <h1 className="font-bold text-4xl text-gray-700 mb-7">
+            <h1 className="font-bold text-3xl text-gray-700 mb-7">
               {" "}
               A whole world of freelance talent at your fingertips
             </h1>
@@ -162,6 +164,8 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <MainCategory />
+      <CustomerSlick />
     </Fragment>
   );
 }
