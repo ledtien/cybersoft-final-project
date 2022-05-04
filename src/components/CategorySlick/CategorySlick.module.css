@@ -1,0 +1,42 @@
+/* .slick-prev::before, .slick-next::before {
+    color: gray !important;
+    font-size: 3rem !important;
+    
+} */
+.slick-prev, .slick-next {
+    border-radius: 30px !important;
+    background-color: #fff !important;
+    width: 48px !important;
+    height: 48px !important;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.15) !important;
+    border: 0 !important;
+    text-align: center !important;
+    position: absolute !important;
+    top: 50% !important;
+    z-index: 4 !important;
+}
+
+.slick-prev::before {
+    content: '' !important;
+    background:url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/arrows.a8b0bad.svg) no-repeat !important;
+    background-size:cover !important;
+        position:absolute !important;
+    width:16px !important;
+    height:16px !important;
+    left: 34% !important;
+    bottom: 15px !important;
+    background-position: 0 -32px !important;
+    
+}
+
+.slick-next::before {
+    content: '' !important;
+    background:url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/arrows.a8b0bad.svg) no-repeat !important;
+    background-size:cover !important;
+        position:absolute !important;
+    width:16px !important;
+    height:16px !important;
+    left: 34% !important;
+    bottom: 15px !important;
+    background-position: 0 -48px !important;
+}
