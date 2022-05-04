@@ -16,9 +16,6 @@
     z-index: 3 !important;
 }
 
-.slick-next {
-    left: 96% !important;
-}
 
 .slick-prev::before {
     content: '' !important;
