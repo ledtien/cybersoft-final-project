@@ -164,7 +164,7 @@ export default function Header(props) {
           style={{ borderTop: "1px solid #e4e5e7" }}
         >
           <div className="container flex items-center px-12 mx-auto justify-between">
-            {typeJobs?.slice(0, 9).map((job, index) => {
+            {typeJobs?.slice(3, 12).map((job, index) => {
               return (
                 <div className={` ${headerStyle.secondNavbarLine}`} key={index}>
                   <Dropdown
@@ -173,6 +173,7 @@ export default function Header(props) {
                         <Menu
                           style={{
                             marginTop: "3px",
+                            cursor: "pointer",
                           }}
                         >
                           {job.subTypeJobs.map((sub, index) => {
@@ -187,7 +188,8 @@ export default function Header(props) {
                     <div className={``} onClick={(e) => e.preventDefault()}>
                       <div
                         className={`${headerStyle.secondNavbarLine}`}
-                        style={{ lineHeight: "inherit" }}
+                        style={{ lineHeight: "inherit", cursor: "pointer" }}
+                        onClick={(e) => console.log(e)}
                       >
                         {job.name}
                       </div>
