@@ -22,6 +22,7 @@ export default function JobsList(props) {
   let stringSearch = props.location.search.substring(6);
   let nameSearch = stringSearch.replaceAll("%20", " ");
   let totalPage = Math.ceil(jobsByName.length);
+
   useEffect(() => {
     if (nameSearch !== "") {
       dispatch(getJobsByName(nameSearch));
