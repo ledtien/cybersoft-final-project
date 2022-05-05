@@ -1,4 +1,3 @@
-import { DOMAIN } from "../utils/settings/config";
 import { baseService } from "./baseService";
 
 export class TypeJobsService extends baseService {
