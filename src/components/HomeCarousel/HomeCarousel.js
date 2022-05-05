@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Carousel } from "antd";
 import "./HomeCarousel.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+import { Input, AutoComplete } from "antd";
+import { getJobsByName } from "../../redux/actions/JobsAction";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { history } from "../../App";
 
 export default function HomeCarousel() {
+  const searchRef = useRef();
+  const [searchValue, setSearchValue] = useState("");
+  const { jobsByName } = useSelector((state) => state.JobsReducer);
+  const dispatch = useDispatch();
+  console.log({ jobsByName });
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    dispatch(getJobsByName(value));
+
+    setTimeout(() => {
+      history.push(`/jobs/search/by-name?name=${value}`);
+    }, 1500);
+  };
+
+  const handleSearch = (value) => {
+    if (value !== "") {
+      if (searchRef.current) {
+        clearTimeout(searchRef.current);
+      }
+
+      searchRef.current = setTimeout(() => {
+        dispatch(getJobsByName(value));
+      }, 700);
+    } else return;
+  };
+
+  const onSelect = (value, option) => {
+    setSearchValue(option.label);
+    dispatch(getJobsByName(option.label));
+    setTimeout(() => {
+      history.push(`/jobs/search/by-name?name=${option.label}`);
+    }, 1500);
+  };
+
+  const options = jobsByName?.map((job, index) => {
+    return { value: job._id, label: job.name };
+  });
+
   const heroImg = [
     {
       heroImg:
@@ -72,24 +116,44 @@ export default function HomeCarousel() {
                       business
                     </h1>
                   </div>
-                  <form>
-                    <Input
-                      style={{
-                        width: "80%",
-                        padding: "10.5px 0px",
-                        borderRadius: "2px 0px 0px 2px",
+
+                  <div>
+                    <AutoComplete
+                      style={{ width: "80%" }}
+                      options={options}
+                      onSelect={onSelect}
+                      onSearch={handleSearch}
+                      onChange={(text) => {
+                        setSearchValue(text);
                       }}
-                      size="large"
-                      placeholder={`Try "building mobile app"`}
-                      prefix={<SearchOutlined className="ml-5" />}
-                    />
+                      value={searchValue}
+                    >
+                      <Input
+                        style={{
+                          width: "100%",
+                        }}
+                        size="large"
+                        placeholder={`Try "building mobile app"`}
+                        prefix={<SearchOutlined className="ml-5" />}
+                        onPressEnter={handleSearchSubmit}
+                      />
+                    </AutoComplete>
                     <button
+                      onClick={() => {
+                        dispatch(getJobsByName(searchValue));
+                        setTimeout(() => {
+                          history.push(
+                            `/jobs/search/by-name?name=${searchValue}`
+                          );
+                        }, 1500);
+                      }}
                       className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600"
-                      style={{ padding: "10px 20px" }}
+                      style={{ padding: "6px 20px" }}
                     >
                       Search
                     </button>
-                  </form>
+                  </div>
+
                   <div className="pt-6 text-sm font-semibold">
                     <p>
                       Popular:{" "}
