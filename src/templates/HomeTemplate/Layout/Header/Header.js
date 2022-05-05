@@ -1,22 +1,27 @@
 import _ from "lodash";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
 import { TOKEN, USER_LOGIN } from "../../../../utils/settings/config";
 import headerStyle from "./Header.module.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+import { AutoComplete, Input } from "antd";
 import { Menu, Dropdown, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
 import { type } from "@testing-library/user-event/dist/type";
+import { getJobsByName } from "../../../../redux/actions/JobsAction";
 
 export default function Header(props) {
   const [navbar, setNavbar] = useState(false);
   const [navbarSecond, setNavbarSecond] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const searchRef = useRef();
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
-
+  const { jobsByName } = useSelector((state) => state.JobsReducer);
   const dispatch = useDispatch();
+  console.log({ jobsByName });
+
   useEffect(() => {
     dispatch(getTypeJobsAction());
   }, [dispatch]);
@@ -36,6 +41,40 @@ export default function Header(props) {
   };
 
   window.addEventListener("scroll", changeNavbarBg);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    dispatch(getJobsByName(value));
+
+    setTimeout(() => {
+      history.push(`/jobs/search/by-name?name=${value}`);
+    }, 1500);
+  };
+
+  const handleSearch = (value) => {
+    if (value !== "") {
+      if (searchRef.current) {
+        clearTimeout(searchRef.current);
+      }
+
+      searchRef.current = setTimeout(() => {
+        dispatch(getJobsByName(value));
+      }, 700);
+    } else return;
+  };
+
+  const onSelect = (value, option) => {
+    setSearchValue(option.label);
+    dispatch(getJobsByName(option.label));
+    setTimeout(() => {
+      history.push(`/jobs/search/by-name?name=${option.label}`);
+    }, 1500);
+  };
+
+  const options = jobsByName?.map((job, index) => {
+    return { value: job._id, label: job.name };
+  });
 
   const renderLogin = () => {
     return (
@@ -111,7 +150,7 @@ export default function Header(props) {
             </g>
           </svg>
         </a>
-        <form
+        <div
           className={
             navbarSecond
               ? `flex justify-start items-center ml-5 transition duration-150 ease-in opacity-100 `
@@ -119,18 +158,39 @@ export default function Header(props) {
           }
           style={{ width: "400px" }}
         >
-          <Input
-            size="medium"
-            placeholder={`Try "building mobile app"`}
-            prefix={<SearchOutlined />}
-          />
+          <AutoComplete
+            style={{ width: "80%" }}
+            options={options}
+            onSelect={onSelect}
+            onSearch={handleSearch}
+            onChange={(text) => {
+              setSearchValue(text);
+            }}
+            value={searchValue}
+          >
+            <Input
+              style={{
+                width: "100%",
+              }}
+              size="medium"
+              placeholder={`Try "building mobile app"`}
+              prefix={<SearchOutlined className="ml-5" />}
+              onPressEnter={handleSearchSubmit}
+            />
+          </AutoComplete>
           <button
-            className="bg-green-500 rounded-r-sm text-sm font-semibold text-white transition duration-150 ease-in hover:bg-green-600"
-            style={{ padding: "6px 10px" }}
+            onClick={() => {
+              dispatch(getJobsByName(searchValue));
+              setTimeout(() => {
+                history.push(`/jobs/search/by-name?name=${searchValue}`);
+              }, 1500);
+            }}
+            className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600 text-white"
+            style={{ padding: "2px 15px" }}
           >
             Search
           </button>
-        </form>
+        </div>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <NavLink
             to="/"
