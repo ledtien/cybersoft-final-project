@@ -18,11 +18,9 @@ export default function HomeCarousel() {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target;
-    dispatch(getJobsByName(value));
+    // dispatch(getJobsByName(value));
 
-    setTimeout(() => {
-      history.push(`/jobs/search/by-name?name=${value}`);
-    }, 1500);
+    history.push(`/jobs/search/by-name?name=${value}`);
   };
 
   const handleSearch = (value) => {
@@ -39,10 +37,9 @@ export default function HomeCarousel() {
 
   const onSelect = (value, option) => {
     setSearchValue(option.label);
-    dispatch(getJobsByName(option.label));
-    setTimeout(() => {
-      history.push(`/jobs/search/by-name?name=${option.label}`);
-    }, 1500);
+    // dispatch(getJobsByName(option.label));
+
+    history.push(`/jobs/search/by-name?name=${option.label}`);
   };
 
   const options = jobsByName?.map((job, index) => {
@@ -140,12 +137,11 @@ export default function HomeCarousel() {
                     </AutoComplete>
                     <button
                       onClick={() => {
-                        dispatch(getJobsByName(searchValue));
-                        setTimeout(() => {
-                          history.push(
-                            `/jobs/search/by-name?name=${searchValue}`
-                          );
-                        }, 1500);
+                        // dispatch(getJobsByName(searchValue));
+
+                        history.push(
+                          `/jobs/search/by-name?name=${searchValue}`
+                        );
                       }}
                       className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600"
                       style={{ padding: "6px 20px" }}
@@ -154,33 +150,47 @@ export default function HomeCarousel() {
                     </button>
                   </div>
 
-                  <div className="pt-6 text-sm font-semibold">
-                    <p>
+                  <div className="pt-6 text-sm ">
+                    <p className="font-semibold">
                       Popular:{" "}
-                      <span
-                        className="ml-2 mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                      <button
+                        className="font-semibold ml-2 mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
+                        onClick={() => {
+                          history.push(
+                            `/jobs/search/by-name?name=Website Design`
+                          );
+                        }}
                       >
                         Website Design
-                      </span>
-                      <span
-                        className="mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                      </button>
+                      <button
+                        className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
+                        onClick={() => {
+                          history.push(`/jobs/search/by-name?name=Game`);
+                        }}
                       >
-                        Word Press
-                      </span>
-                      <span
-                        className="mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                        Game
+                      </button>
+                      <button
+                        className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
+                        onClick={() => {
+                          history.push(`/jobs/search/by-name?name=Logo Design`);
+                        }}
                       >
                         Logo Design
-                      </span>
-                      <span
-                        className="mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                      </button>
+                      <button
+                        className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
+                        onClick={() => {
+                          history.push(`/jobs/search/by-name?name=NFT Art`);
+                        }}
                       >
                         NFT Art
-                      </span>
+                      </button>
                     </p>
                   </div>
                 </div>
