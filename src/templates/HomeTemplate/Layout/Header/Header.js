@@ -45,11 +45,7 @@ export default function Header(props) {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target;
-    dispatch(getJobsByName(value));
-
-    setTimeout(() => {
-      history.push(`/jobs/search/by-name?name=${value}`);
-    }, 1500);
+    history.push(`/jobs/search/by-name?name=${value}`);
   };
 
   const handleSearch = (value) => {
@@ -66,10 +62,8 @@ export default function Header(props) {
 
   const onSelect = (value, option) => {
     setSearchValue(option.label);
-    dispatch(getJobsByName(option.label));
-    setTimeout(() => {
-      history.push(`/jobs/search/by-name?name=${option.label}`);
-    }, 1500);
+
+    history.push(`/jobs/search/by-name?name=${option.label}`);
   };
 
   const options = jobsByName?.map((job, index) => {
@@ -180,10 +174,7 @@ export default function Header(props) {
           </AutoComplete>
           <button
             onClick={() => {
-              dispatch(getJobsByName(searchValue));
-              setTimeout(() => {
-                history.push(`/jobs/search/by-name?name=${searchValue}`);
-              }, 1500);
+              history.push(`/jobs/search/by-name?name=${searchValue}`);
             }}
             className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600 text-white"
             style={{ padding: "2px 15px" }}
