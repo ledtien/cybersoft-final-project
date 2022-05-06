@@ -5,7 +5,6 @@ import "./MainCategory.css";
 
 export default function MainCategory() {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
-  console.log({ typeJobs });
 
   return (
     <div className="py-24">

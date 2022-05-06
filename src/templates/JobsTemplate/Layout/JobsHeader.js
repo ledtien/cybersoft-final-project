@@ -4,10 +4,16 @@ import { SearchOutlined } from "@ant-design/icons";
 import { AutoComplete, Input } from "antd";
 import { Menu, Dropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getTypeJobsAction } from "../../../redux/actions/TypeJobsAction";
+import {
+  getDetailTypeJobAction,
+  getTypeJobsAction,
+} from "../../../redux/actions/TypeJobsAction";
 import headerStyle from "./JobsHeader.module.css";
 import { history } from "../../../App";
-import { getJobsByName } from "../../../redux/actions/JobsAction";
+import {
+  getJobsByName,
+  getJobsBySubType,
+} from "../../../redux/actions/JobsAction";
 
 export default function JobsHeader(props) {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
@@ -15,7 +21,6 @@ export default function JobsHeader(props) {
   const searchRef = useRef();
   const [searchValue, setSearchValue] = useState("");
   const { jobsByName } = useSelector((state) => state.JobsReducer);
-  console.log({ jobsByName });
 
   useEffect(() => {
     dispatch(getTypeJobsAction());
@@ -204,9 +209,9 @@ export default function JobsHeader(props) {
                               key={index}
                               onClick={() => {
                                 history.push(
-                                  `/jobs/search/by-name?name=${sub.name}`
+                                  `/jobs/category/${job.name}?subType=${sub._id}`
                                 );
-                                dispatch(getJobsByName(sub.name));
+                                dispatch(getJobsBySubType(sub._id, 0, 12));
                               }}
                             >
                               {sub.name}
@@ -223,6 +228,7 @@ export default function JobsHeader(props) {
                       style={{ lineHeight: "inherit", cursor: "pointer" }}
                       onClick={() => {
                         history.push(`/type-jobs/${job._id}`);
+                        dispatch(getDetailTypeJobAction(job._id));
                       }}
                     >
                       {job.name}

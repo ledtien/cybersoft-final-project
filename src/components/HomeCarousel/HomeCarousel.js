@@ -13,7 +13,6 @@ export default function HomeCarousel() {
   const [searchValue, setSearchValue] = useState("");
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const dispatch = useDispatch();
-  console.log({ jobsByName });
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -158,7 +157,7 @@ export default function HomeCarousel() {
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
                         onClick={() => {
                           history.push(
-                            `/jobs/search/by-name?name=Website Design`
+                            `/jobs/category/${`Website Design`}?subType=6198742faef344001cecfb3b&skip=0&limit=10`
                           );
                         }}
                       >
@@ -168,16 +167,20 @@ export default function HomeCarousel() {
                         className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
                         onClick={() => {
-                          history.push(`/jobs/search/by-name?name=Game`);
+                          history.push(
+                            `/jobs/category/${` WordPress`}?subType=6198742baef344001cecfb37&skip=0&limit=10`
+                          );
                         }}
                       >
-                        Game
+                        WordPress
                       </button>
                       <button
                         className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
                         onClick={() => {
-                          history.push(`/jobs/search/by-name?name=Logo Design`);
+                          history.push(
+                            `/jobs/category/${` Logo Design`}?subType=619874a4aef344001cecfb99&skip=0&limit=10`
+                          );
                         }}
                       >
                         Logo Design
@@ -186,7 +189,9 @@ export default function HomeCarousel() {
                         className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
                         style={{ border: "1px solid #fff", fontSize: "14px" }}
                         onClick={() => {
-                          history.push(`/jobs/search/by-name?name=NFT Art`);
+                          history.push(
+                            `/jobs/category/${` NFT Art`}?subType=61987435aef344001cecfb3f&skip=0&limit=10`
+                          );
                         }}
                       >
                         NFT Art

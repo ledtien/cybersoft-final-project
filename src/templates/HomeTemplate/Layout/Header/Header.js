@@ -10,7 +10,10 @@ import { Menu, Dropdown, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
 import { type } from "@testing-library/user-event/dist/type";
-import { getJobsByName } from "../../../../redux/actions/JobsAction";
+import {
+  getJobsByName,
+  getJobsBySubType,
+} from "../../../../redux/actions/JobsAction";
 
 export default function Header(props) {
   const [navbar, setNavbar] = useState(false);
@@ -20,7 +23,6 @@ export default function Header(props) {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const dispatch = useDispatch();
-  console.log({ jobsByName });
 
   useEffect(() => {
     dispatch(getTypeJobsAction());
@@ -231,9 +233,9 @@ export default function Header(props) {
                                 key={index}
                                 onClick={() => {
                                   history.push(
-                                    `/jobs/search/by-name?name=${sub.name}`
+                                    `/jobs/category/${job.name}?subType=${sub._id}`
                                   );
-                                  dispatch(getJobsByName(sub.name));
+                                  dispatch(getJobsBySubType(sub._id, 0, 12));
                                 }}
                               >
                                 {sub.name}{" "}
