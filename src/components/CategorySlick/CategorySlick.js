@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
+import { history } from "../../App";
 import { getSubTypeJobsAction } from "../../redux/actions/SubTypeJobsAction";
 import styleSlick from "./CategorySlick.module.css";
 
@@ -89,7 +90,14 @@ export default function CategorySlick() {
                     style={{ height: "345px", position: "relative" }}
                     key={index}
                   >
-                    <a href="/" className="">
+                    <div
+                      onClick={() => {
+                        history.push(
+                          `/jobs/search/by-name?name=${subJob.name}`
+                        );
+                      }}
+                      className="cursor-pointer"
+                    >
                       <h4 className="z-10 relative p-6 text-white text-2xl font-bold">
                         <small className="block text-sm font-normal">
                           Build your Brand
@@ -101,7 +109,7 @@ export default function CategorySlick() {
                         src={subJob.image}
                         className="absolute top-0 bottom-0 left-0 right-0 rounded-sm h-full"
                       />
-                    </a>
+                    </div>
                   </div>
                 </div>
               );

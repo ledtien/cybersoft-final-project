@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { history } from "../../App";
 import "./MainCategory.css";
 
 export default function MainCategory() {
@@ -15,10 +16,13 @@ export default function MainCategory() {
         <div className="grid grid-cols-5 items-center justify-center mt-10">
           {typeJobs?.slice(3, 12).map((job, index) => {
             return (
-              <a
+              <div
                 href="/"
-                className="flex flex-col justify-center items-center relative main-category-underline mb-7"
+                className="flex flex-col justify-center items-center relative main-category-underline mb-7 cursor-pointer"
                 key={index}
+                onClick={() => {
+                  history.push(`/type-jobs/${job._id}`);
+                }}
               >
                 <img
                   src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/graphics-design.d32a2f8.svg"
@@ -26,7 +30,7 @@ export default function MainCategory() {
                   width={50}
                 />
                 <p className="text-black mt-3"> {job.name}</p>
-              </a>
+              </div>
             );
           })}
         </div>

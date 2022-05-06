@@ -199,7 +199,19 @@ export default function JobsHeader(props) {
                         }}
                       >
                         {job.subTypeJobs.map((sub, index) => {
-                          return <Menu.Item key={index}>{sub.name}</Menu.Item>;
+                          return (
+                            <Menu.Item
+                              key={index}
+                              onClick={() => {
+                                history.push(
+                                  `/jobs/search/by-name?name=${sub.name}`
+                                );
+                                dispatch(getJobsByName(sub.name));
+                              }}
+                            >
+                              {sub.name}
+                            </Menu.Item>
+                          );
                         })}
                       </Menu>
                     );
@@ -209,7 +221,9 @@ export default function JobsHeader(props) {
                     <div
                       className={`${headerStyle.secondNavbarLine}`}
                       style={{ lineHeight: "inherit", cursor: "pointer" }}
-                      onClick={(e) => console.log(e)}
+                      onClick={() => {
+                        history.push(`/type-jobs/${job._id}`);
+                      }}
                     >
                       {job.name}
                     </div>
