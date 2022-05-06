@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GlobalOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
+  const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTypeJobsAction());
+  }, [dispatch]);
   return (
     <>
       <footer className="text-gray-600 body-font ">
@@ -12,26 +20,18 @@ export default function Footer() {
                 Categories
               </h2>
               <nav className="list-none mb-10">
-                <li className="pb-4">
-                  <a className="text-gray-600 hover:underline hover:text-gray-500 ">
-                    First Link
-                  </a>
-                </li>
-                <li className="pb-4">
-                  <a className="text-gray-600 hover:underline hover:text-gray-500 ">
-                    Second Link
-                  </a>
-                </li>
-                <li className="pb-4">
-                  <a className="text-gray-600 hover:underline hover:text-gray-500 ">
-                    Third Link
-                  </a>
-                </li>
-                <li className="pb-4">
-                  <a className="text-gray-600 hover:underline hover:text-gray-500 ">
-                    Fourth Link
-                  </a>
-                </li>
+                {typeJobs?.slice(0, 11).map((job, index) => {
+                  return (
+                    <li className="pb-4" key={index}>
+                      <NavLink
+                        to={`/type-jobs/${job._id}`}
+                        className="text-gray-600 hover:underline hover:text-gray-500 "
+                      >
+                        {job.name}
+                      </NavLink>
+                    </li>
+                  );
+                })}
               </nav>
             </div>
             <div className="lg:w-1/5 md:w-1/2 w-full ">
