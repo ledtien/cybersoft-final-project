@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage/HomePage";
 import "./App.css";
 import JobsList from "./pages/JobsList/JobsList";
 import { JobsTemplate } from "./templates/JobsTemplate/JobsTemplate";
+import SubTypeJobsList from "./pages/SubTypeJobsList/SubTypeJobsList";
+import CategoryJobsList from "./pages/CategoryJobsList/CategoryJobsList";
 
 export const history = createBrowserHistory();
 
@@ -19,6 +21,16 @@ function App() {
           <HomeTemplate path="/" exact Component={HomePage} />
           <HomeTemplate path="/home" exact Component={HomePage} />
           <JobsTemplate path="/jobs/search/:name" exact Component={JobsList} />
+          <JobsTemplate
+            path="/jobs/category/:name"
+            exact
+            Component={CategoryJobsList}
+          />
+          <JobsTemplate
+            path="/type-jobs/:id"
+            exact
+            Component={SubTypeJobsList}
+          />
         </Switch>
       </Router>
     </div>
