@@ -7,7 +7,6 @@ import styleSlick from "./CategorySlick.module.css";
 
 export default function CategorySlick() {
   const { subTypeJobs } = useSelector((state) => state.SubTypeJobsReducer);
-  console.log(subTypeJobs);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubTypeJobsAction());
@@ -93,7 +92,7 @@ export default function CategorySlick() {
                     <div
                       onClick={() => {
                         history.push(
-                          `/jobs/search/by-name?name=${subJob.name}`
+                          `/jobs/category/${subJob.name}?subType=${subJob._id}`
                         );
                       }}
                       className="cursor-pointer"
