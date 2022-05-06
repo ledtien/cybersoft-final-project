@@ -1,1 +1,3 @@
 export const GET_TYPE_JOBS = "GET_TYPE_JOBS";
+
+export const GET_DETAIL_TYPE_JOB = "GET_DETAIL_TYPE_JOB";
