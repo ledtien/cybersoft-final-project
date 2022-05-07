@@ -61,6 +61,7 @@ export default function SubTypeJobsList() {
             {detailTypeJob?.subTypeJobs?.map((subJob, index) => {
               return (
                 <div
+                  key={index}
                   className="cursor-pointer hover:text-green-600"
                   onClick={() => {
                     history.push(
