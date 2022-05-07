@@ -1,0 +1,3 @@
+export const USER_SIGN_IN_ACTION = "USER_SIGN_IN_ACTION";
+
+export const USER_SIGN_UP_ACTION = "USER_SIGN_UP_ACTION";
