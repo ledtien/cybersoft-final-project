@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Collapse, Form, Input, Rate, Tooltip } from "antd";
-import React, { createElement, useEffect, useRef, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -18,7 +18,6 @@ import {
   LikeFilled,
 } from "@ant-design/icons";
 import { Tabs } from "antd";
-import { Redirect } from "react-router-dom";
 import { USER_LOGIN } from "../../utils/settings/config";
 import { history } from "../../App";
 
