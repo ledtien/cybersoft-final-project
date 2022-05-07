@@ -9,6 +9,7 @@ import JobsList from "./pages/JobsList/JobsList";
 import { JobsTemplate } from "./templates/JobsTemplate/JobsTemplate";
 import SubTypeJobsList from "./pages/SubTypeJobsList/SubTypeJobsList";
 import CategoryJobsList from "./pages/CategoryJobsList/CategoryJobsList";
+import JobDetail from "./pages/JobDetail/JobDetail";
 
 export const history = createBrowserHistory();
 
@@ -31,6 +32,8 @@ function App() {
             exact
             Component={SubTypeJobsList}
           />
+
+          <JobsTemplate path="/jobs/:id" exact Component={JobDetail} />
         </Switch>
       </Router>
     </div>
