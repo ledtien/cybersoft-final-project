@@ -14,6 +14,8 @@ import {
   getJobsByName,
   getJobsBySubType,
 } from "../../../redux/actions/JobsAction";
+import _ from "lodash";
+import { USER_LOGIN } from "../../../utils/settings/config";
 
 export default function JobsHeader(props) {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
@@ -21,6 +23,8 @@ export default function JobsHeader(props) {
   const searchRef = useRef();
   const [searchValue, setSearchValue] = useState("");
   const { jobsByName } = useSelector((state) => state.JobsReducer);
+  const { userLogin } = useSelector((state) => state.UserReducer);
+  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
 
   useEffect(() => {
     dispatch(getTypeJobsAction());
@@ -61,44 +65,65 @@ export default function JobsHeader(props) {
   });
 
   const renderLogin = () => {
+    if (_.isEmpty(userLogin)) {
+      return (
+        <Fragment>
+          <button
+            className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
+            onClick={() => props.history.push("/auth/signin")}
+          >
+            Sign in
+          </button>
+          <button
+            className={`self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`}
+            onClick={() => props.history.push("/auth/signup")}
+          >
+            Join
+          </button>
+        </Fragment>
+      );
+    }
     return (
       <Fragment>
-        <button
-          className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
-          onClick={() => props.history.push("/login")}
+        <NavLink
+          to="/"
+          className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
         >
-          Sign in
-        </button>
-        <button
-          className={`self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`}
-          onClick={() => props.history.push("/register")}
+          Messages
+        </NavLink>
+        <NavLink
+          to="/"
+          className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
         >
-          Join
-        </button>
+          Lists
+        </NavLink>
+        <NavLink
+          to="/"
+          className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
+        >
+          Order
+        </NavLink>
+        <button
+          className={`self-center py-px px-2 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`}
+          onClick={() =>
+            props.history.push(`/user/${userLocalStorage?.user?._id}`)
+          }
+        >
+          {userLocalStorage?.user?.name.substring(0, 1)}
+        </button>{" "}
+        {/* <button
+          className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
+          onClick={() => {
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem(TOKEN);
+            history.push("/");
+            window.location.reload();
+          }}
+        >
+          LOG-OUT
+        </button> */}
       </Fragment>
     );
-
-    // return (
-    //   <Fragment>
-    //     <button
-    //       className="self-center py-3 rounded"
-    //       onClick={() => props.history.push("/profile")}
-    //     >
-    //       Hello {userLogin.taiKhoan}
-    //     </button>{" "}
-    //     <button
-    //       className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
-    //       onClick={() => {
-    //         localStorage.removeItem(USER_LOGIN);
-    //         localStorage.removeItem(TOKEN);
-    //         history.push("/");
-    //         window.location.reload();
-    //       }}
-    //     >
-    //       LOG-OUT
-    //     </button>
-    //   </Fragment>
-    // );
   };
 
   return (

@@ -9,7 +9,6 @@ import { AutoComplete, Input } from "antd";
 import { Menu, Dropdown, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
-import { type } from "@testing-library/user-event/dist/type";
 import {
   getJobsByName,
   getJobsBySubType,
@@ -22,6 +21,9 @@ export default function Header(props) {
   const searchRef = useRef();
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
   const { jobsByName } = useSelector((state) => state.JobsReducer);
+  const { userLogin } = useSelector((state) => state.UserReducer);
+  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
+  console.log({ userLogin });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -73,48 +75,85 @@ export default function Header(props) {
   });
 
   const renderLogin = () => {
+    if (_.isEmpty(userLogin)) {
+      return (
+        <Fragment>
+          <button
+            className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
+            onClick={() => props.history.push("/auth/signin")}
+          >
+            Sign in
+          </button>
+          <button
+            className={
+              navbar
+                ? `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
+                : `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-white`
+            }
+            onClick={() => props.history.push("/auth/signup")}
+          >
+            Join
+          </button>
+        </Fragment>
+      );
+    }
     return (
       <Fragment>
-        <button
-          className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
-          onClick={() => props.history.push("/login")}
+        <NavLink
+          to="/"
+          className={
+            navbar
+              ? `mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`
+              : `mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`
+          }
         >
-          Sign in
-        </button>
+          Messages
+        </NavLink>
+        <NavLink
+          to="/"
+          className={
+            navbar
+              ? `mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`
+              : `mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`
+          }
+        >
+          Lists
+        </NavLink>
+        <NavLink
+          to="/"
+          className={
+            navbar
+              ? `mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`
+              : `mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`
+          }
+        >
+          Order
+        </NavLink>
         <button
           className={
             navbar
-              ? `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
-              : `self-center px-5 py-1 rounded font-semibold transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-white`
+              ? `self-center py-px px-2 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
+              : `self-center py-px px-2 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-gray-400`
           }
-          onClick={() => props.history.push("/register")}
+          onClick={() =>
+            props.history.push(`/user/${userLocalStorage?.user?._id}`)
+          }
         >
-          Join
-        </button>
+          {userLocalStorage?.user?.name.substring(0, 1)}
+        </button>{" "}
+        {/* <button
+          className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
+          onClick={() => {
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem(TOKEN);
+            history.push("/");
+            window.location.reload();
+          }}
+        >
+          LOG-OUT
+        </button> */}
       </Fragment>
     );
-
-    // return (
-    //   <Fragment>
-    //     <button
-    //       className="self-center py-3 rounded"
-    //       onClick={() => props.history.push("/profile")}
-    //     >
-    //       Hello {userLogin.taiKhoan}
-    //     </button>{" "}
-    //     <button
-    //       className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
-    //       onClick={() => {
-    //         localStorage.removeItem(USER_LOGIN);
-    //         localStorage.removeItem(TOKEN);
-    //         history.push("/");
-    //         window.location.reload();
-    //       }}
-    //     >
-    //       LOG-OUT
-    //     </button>
-    //   </Fragment>
-    // );
   };
 
   return (
