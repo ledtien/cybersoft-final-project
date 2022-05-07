@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { createBrowserHistory } from "history";
 import { Router, Switch } from "react-router-dom";
 import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
 import HomePage from "./pages/HomePage/HomePage";
-// import Loading from "./components/Loading/Loading";
+import Loading from "./components/Loading/Loading";
 import "./App.css";
 import JobsList from "./pages/JobsList/JobsList";
 import { JobsTemplate } from "./templates/JobsTemplate/JobsTemplate";
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <Router history={history}>
-        {/* <Loading /> */}
+        <Loading />
         <Switch>
           <HomeTemplate path="/" exact Component={HomePage} />
           <HomeTemplate path="/home" exact Component={HomePage} />
