@@ -1,6 +1,8 @@
 export const DOMAIN = "https://fiverr.cybersoft.edu.vn";
 export const TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVlNDU0NjdjOTcxODAwMWRlMGI3YjIiLCJlbWFpbCI6InRpZW5sZUBnbWFpbC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjUxNTQ1NzI2fQ.rKeCux9iNROH4wEJgYfM3CyJOZxj7zf7dY9lIwcedvs";
+export const TOKEN_BY_CLASS =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCBTw6FuZyAwMiIsIkhldEhhblN0cmluZyI6IjI0LzA4LzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY2MTI5OTIwMDAwMCIsIm5iZiI6MTYzNzM0MTIwMCwiZXhwIjoxNjYxNDQ2ODAwfQ.Jyh-ALPYBzDojZwAY5mCMSzdNFvh1i-5lNzT3RhI0nU";
 
 export const USER_LOGIN = "USER_LOGIN";
 
