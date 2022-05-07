@@ -14,3 +14,17 @@ export const getCommentsByJobAction = (jobId) => {
     }
   };
 };
+
+export const postCommentAction = (comment) => {
+  return async (dispatch) => {
+    try {
+      const result = await commentsService.postComment(comment);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        dispatch(getCommentsByJobAction(comment.job));
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+};
