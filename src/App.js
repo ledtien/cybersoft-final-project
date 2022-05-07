@@ -10,6 +10,9 @@ import { JobsTemplate } from "./templates/JobsTemplate/JobsTemplate";
 import SubTypeJobsList from "./pages/SubTypeJobsList/SubTypeJobsList";
 import CategoryJobsList from "./pages/CategoryJobsList/CategoryJobsList";
 import JobDetail from "./pages/JobDetail/JobDetail";
+import { UserTemplate } from "./templates/UserTemplate/UserTemplate";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
 
 export const history = createBrowserHistory();
 
@@ -34,6 +37,8 @@ function App() {
           />
 
           <JobsTemplate path="/jobs/:id" exact Component={JobDetail} />
+          <UserTemplate path="/auth/signup" exact Component={Register} />
+          <UserTemplate path="/auth/signin" exact Component={Login} />
         </Switch>
       </Router>
     </div>
