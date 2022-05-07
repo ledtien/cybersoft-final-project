@@ -50,7 +50,12 @@ export default function CategoryJobsList(props) {
     return jobsBySubType.slice(0, 12).map((job, index) => {
       return (
         <div key={index}>
-          <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+          <div
+            className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden"
+            onClick={() => {
+              history.push(`/jobs/${job._id}`);
+            }}
+          >
             <img
               className="lg:h-48 md:h-36 w-full object-cover object-center cursor-pointer"
               src={job.image}
