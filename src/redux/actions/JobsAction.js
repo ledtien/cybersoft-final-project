@@ -7,6 +7,7 @@ import {
   GET_JOB_DETAIL,
   GET_TOTAL_PAGE_BY_SUB_TYPE,
 } from "../constants/JobsConstant";
+import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
 export const getJobsByName = (name) => {
   return async (dispatch) => {
@@ -23,6 +24,8 @@ export const getJobsByName = (name) => {
 
 export const getAllJobs = () => {
   return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
     try {
       const result = await jobsService.getAllJobs();
       if (STATUS_CODE.SUCCESS) {
@@ -31,11 +34,14 @@ export const getAllJobs = () => {
     } catch (error) {
       console.log(error.response.data);
     }
+    dispatch(hideLoadingAction());
   };
 };
 
 export const getJobsBySubType = (id, pageVisited, pageLimit) => {
   return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
     try {
       const result = await jobsService.getJobsBySubType(
         id,
@@ -48,6 +54,7 @@ export const getJobsBySubType = (id, pageVisited, pageLimit) => {
     } catch (error) {
       console.log(error.response.data);
     }
+    dispatch(hideLoadingAction());
   };
 };
 
@@ -70,6 +77,7 @@ export const getTotalPageBySubType = (id, pageVisited, pageLimit) => {
 
 export const getJobDetail = (id) => {
   return async (dispatch) => {
+    dispatch(displayLoadingAction());
     try {
       const result = await jobsService.getJobDetail(id);
       if (STATUS_CODE.SUCCESS) {
@@ -78,11 +86,14 @@ export const getJobDetail = (id) => {
     } catch (error) {
       console.log(error.response.data);
     }
+    dispatch(hideLoadingAction());
   };
 };
 
 export const bookingJobAction = (id) => {
   return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
     try {
       const result = await jobsService.bookingJob(id);
       if (STATUS_CODE.SUCCESS) {
@@ -92,5 +103,6 @@ export const bookingJobAction = (id) => {
     } catch (error) {
       console.log(error.response.data);
     }
+    dispatch(hideLoadingAction());
   };
 };
