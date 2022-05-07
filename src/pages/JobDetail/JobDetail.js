@@ -1,17 +1,15 @@
-import { Breadcrumb, Collapse, Rate, Tooltip } from "antd";
+import { Breadcrumb, Button, Collapse, Form, Input, Rate, Tooltip } from "antd";
 import React, { createElement, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { bookingJobAction, getJobDetail } from "../../redux/actions/JobsAction";
-import {
-  StarFilled,
-  FieldTimeOutlined,
-  SyncOutlined,
-  CaretRightFilled,
-} from "@ant-design/icons";
+import { StarFilled, FieldTimeOutlined, SyncOutlined } from "@ant-design/icons";
 import { Comment, Avatar } from "antd";
-import { getCommentsByJobAction } from "../../redux/actions/CommentsAction";
+import {
+  getCommentsByJobAction,
+  postCommentAction,
+} from "../../redux/actions/CommentsAction";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -20,16 +18,24 @@ import {
   LikeFilled,
 } from "@ant-design/icons";
 import { Tabs } from "antd";
+import { Redirect } from "react-router-dom";
+import { USER_LOGIN } from "../../utils/settings/config";
+import { history } from "../../App";
 
 export default function JobDetail() {
+  let { id } = useParams();
   const { jobDetail } = useSelector((state) => state.JobsReducer);
   const { comments } = useSelector((state) => state.CommentsReducer);
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
   const dispatch = useDispatch();
-  let { id } = useParams();
+  const [state, setState] = useState({
+    value: "",
+    id: "",
+  });
 
+  console.log(comments);
   useEffect(() => {
     dispatch(getJobDetail(id));
     dispatch(getCommentsByJobAction(id));
@@ -38,6 +44,7 @@ export default function JobDetail() {
   const { TabPane } = Tabs;
   const { Panel } = Collapse;
   console.log({ jobDetail });
+  const { TextArea } = Input;
 
   const like = () => {
     setLikes(1);
@@ -395,14 +402,14 @@ export default function JobDetail() {
                       <div key={index}>
                         <Comment
                           actions={actions}
-                          author={comment.user.name}
+                          author={comment?.user?.name}
                           avatar={
                             <Avatar
                               src="https://joeschmoe.io/api/v1/random"
-                              alt={comment.user.name}
+                              alt={comment?.user?.name}
                             />
                           }
-                          content={<p>{comment.content}</p>}
+                          content={<p>{comment?.content}</p>}
                           datetime={
                             <Tooltip
                               title={moment().format("YYYY-MM-DD HH:mm:ss")}
@@ -414,6 +421,39 @@ export default function JobDetail() {
                       </div>
                     );
                   })}
+
+                  {localStorage.getItem(USER_LOGIN) ? (
+                    <>
+                      <Form.Item>
+                        <TextArea
+                          rows={4}
+                          onChange={(e) => {
+                            setState({ value: e.target.value });
+                          }}
+                          value={state.value}
+                        />
+                      </Form.Item>
+                      <Form.Item>
+                        <Button
+                          htmlType="submit"
+                          onClick={() => {
+                            let action = {
+                              content: state.value,
+                              job: id,
+                            };
+                            console.log(action);
+                            dispatch(postCommentAction(action));
+                            setState({ value: "" });
+                          }}
+                          type="primary"
+                        >
+                          Add Comment
+                        </Button>
+                      </Form.Item>{" "}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
@@ -718,7 +758,10 @@ export default function JobDetail() {
                 <button
                   className="bg-green-500 rounded-md w-5/6 py-3 text-white hover:bg-green-600"
                   onClick={() => {
-                    console.log(id);
+                    if (!localStorage.getItem(USER_LOGIN)) {
+                      alert("Need to Sign In");
+                      history.push("/auth/signin");
+                    }
                     dispatch(bookingJobAction(id));
                   }}
                 >
