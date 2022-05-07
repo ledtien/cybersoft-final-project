@@ -2,6 +2,7 @@ import {
   GET_ALL_JOBS,
   GET_JOBS_BY_NAME,
   GET_JOBS_BY_SUB_TYPE,
+  GET_JOB_DETAIL,
   GET_TOTAL_PAGE_BY_SUB_TYPE,
 } from "../constants/JobsConstant";
 
@@ -9,6 +10,7 @@ const initialState = {
   jobsByName: [],
   jobsBySubType: [],
   total: 0,
+  jobDetail: {},
 };
 
 export const JobsReducer = (state = initialState, { type, payload }) => {
@@ -25,11 +27,14 @@ export const JobsReducer = (state = initialState, { type, payload }) => {
     }
 
     case GET_TOTAL_PAGE_BY_SUB_TYPE: {
-      console.log(payload.length);
       return { ...state, jobsBySubType: payload, total: payload.length };
     }
     case GET_JOBS_BY_SUB_TYPE: {
       return { ...state, jobsBySubType: payload };
+    }
+
+    case GET_JOB_DETAIL: {
+      return { ...state, jobDetail: payload };
     }
     default:
       return state;

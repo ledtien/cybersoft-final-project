@@ -5,3 +5,5 @@ export const GET_ALL_JOBS = "GET_ALL_JOBS";
 export const GET_JOBS_BY_SUB_TYPE = "GET_JOBS_BY_SUB_TYPE";
 
 export const GET_TOTAL_PAGE_BY_SUB_TYPE = "GET_TOTAL_PAGE_BY_SUB_TYPE";
+
+export const GET_JOB_DETAIL = "GET_JOB_DETAIL";

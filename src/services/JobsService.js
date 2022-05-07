@@ -13,6 +13,14 @@ export class JobsService extends baseService {
       `/api/jobs/by-sub-type?subType=${id}&skip=${pageVisited}&limit=${pageLimit}`
     );
   };
+
+  getJobDetail = (id) => {
+    return this.get(`/api/jobs/${id}`);
+  };
+
+  bookingJob = (id) => {
+    return this.patch(`/api/jobs/booking/${id}`);
+  };
 }
 
 export const jobsService = new JobsService();

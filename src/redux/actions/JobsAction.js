@@ -4,6 +4,7 @@ import {
   GET_ALL_JOBS,
   GET_JOBS_BY_NAME,
   GET_JOBS_BY_SUB_TYPE,
+  GET_JOB_DETAIL,
   GET_TOTAL_PAGE_BY_SUB_TYPE,
 } from "../constants/JobsConstant";
 
@@ -60,6 +61,33 @@ export const getTotalPageBySubType = (id, pageVisited, pageLimit) => {
       );
       if (STATUS_CODE.SUCCESS) {
         dispatch({ type: GET_TOTAL_PAGE_BY_SUB_TYPE, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+};
+
+export const getJobDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      const result = await jobsService.getJobDetail(id);
+      if (STATUS_CODE.SUCCESS) {
+        dispatch({ type: GET_JOB_DETAIL, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+};
+
+export const bookingJobAction = (id) => {
+  return async (dispatch) => {
+    try {
+      const result = await jobsService.bookingJob(id);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        alert("Book job success!");
       }
     } catch (error) {
       console.log(error.response.data);
