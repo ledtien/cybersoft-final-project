@@ -5,6 +5,7 @@ import { JobsReducer } from "./reducers/JobsReducer";
 import { LoadingReducer } from "./reducers/LoadingReducer";
 import { SubTypeJobsReducer } from "./reducers/SubTypeJobsReducer";
 import { TypeJobsReducer } from "./reducers/TypeJobsReducer";
+import { UserReducer } from "./reducers/UserReducer";
 
 const rootReducer = combineReducers({
   // LoadingReducer,
@@ -12,6 +13,8 @@ const rootReducer = combineReducers({
   SubTypeJobsReducer,
   JobsReducer,
   CommentsReducer,
+  UserReducer,
+  LoadingReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
