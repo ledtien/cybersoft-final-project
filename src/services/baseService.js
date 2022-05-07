@@ -16,7 +16,10 @@ export class baseService {
       url: `${DOMAIN}${url}`,
       method: "PATCH",
       data: model,
-      headers: { token: TOKEN, tokenByClass: TOKEN_BY_CLASS },
+      headers: {
+        token: `${localStorage.getItem(TOKEN)}`,
+        tokenByClass: TOKEN_BY_CLASS,
+      },
     });
   };
 
@@ -25,7 +28,10 @@ export class baseService {
       url: `${DOMAIN}${url}`,
       method: "POST",
       data: model,
-      headers: { token: TOKEN, tokenByClass: TOKEN_BY_CLASS },
+      headers: {
+        token: `${localStorage.getItem(TOKEN)}`,
+        tokenByClass: TOKEN_BY_CLASS,
+      },
     });
   };
 
