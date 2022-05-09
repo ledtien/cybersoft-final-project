@@ -1,5 +1,10 @@
 import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
-import { USER_SIGN_IN_ACTION } from "../constants/UserConstant";
+import {
+  GET_USER_DETAIL,
+  UPDATE_USER,
+  UPLOAD_USER_IMAGE,
+  USER_SIGN_IN_ACTION,
+} from "../constants/UserConstant";
 
 let user = {};
 
@@ -14,11 +19,26 @@ const initialState = {
 export const UserReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case USER_SIGN_IN_ACTION: {
-      localStorage.setItem(USER_LOGIN, JSON.stringify(payload));
+      let user = payload.user;
+      localStorage.setItem(USER_LOGIN, JSON.stringify(user));
       localStorage.setItem(TOKEN, payload.token);
       return { ...state, userLogin: payload.user };
     }
 
+    // case UPDATE_USER: {
+    //   localStorage.setItem(USER_LOGIN, JSON.stringify(payload));
+    //   return { ...state, userLogin: payload };
+    // }
+
+    case GET_USER_DETAIL: {
+      localStorage.setItem(USER_LOGIN, JSON.stringify(payload));
+      return { ...state, userLogin: payload };
+    }
+
+    case UPLOAD_USER_IMAGE: {
+      localStorage.setItem(USER_LOGIN, JSON.stringify(payload));
+      return { ...state, userLogin: payload };
+    }
     default:
       return state;
   }
