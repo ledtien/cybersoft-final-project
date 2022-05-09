@@ -18,7 +18,7 @@ export const JobsTemplate = (props) => {
             <JobsHeader {...propsRoute} />
 
             <Component {...propsRoute} />
-            <hr className="mt-20" />
+            <hr className="" />
             <Footer />
           </>
         );
