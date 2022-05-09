@@ -7,7 +7,10 @@ export class baseService {
       url: `${DOMAIN}${url}`,
       method: "PUT",
       data: model,
-      headers: { tokenByClass: TOKEN_BY_CLASS },
+      headers: {
+        token: `${localStorage.getItem(TOKEN)}`,
+        tokenByClass: TOKEN_BY_CLASS,
+      },
     });
   };
 
@@ -39,7 +42,10 @@ export class baseService {
     return Axios({
       url: `${DOMAIN}${url}`,
       method: "GET",
-      headers: { tokenByClass: TOKEN_BY_CLASS }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+      headers: {
+        token: `${localStorage.getItem(TOKEN)}`,
+        tokenByClass: TOKEN_BY_CLASS,
+      },
     });
   };
 
@@ -47,7 +53,7 @@ export class baseService {
     return Axios({
       url: `${DOMAIN}${url}`,
       method: "DELETE",
-      headers: { tokenByClass: TOKEN_BY_CLASS }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+      headers: { tokenByClass: TOKEN_BY_CLASS },
     });
   };
 
