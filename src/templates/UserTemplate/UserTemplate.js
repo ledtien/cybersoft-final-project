@@ -1,11 +1,17 @@
 import { useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
+import { USER_LOGIN } from "../../utils/settings/config";
 
 export const UserTemplate = (props) => {
   const { Component, ...restProps } = props;
   useEffect(() => {
     window.scrollTo(0, 0);
   });
+
+  if (localStorage.getItem(USER_LOGIN)) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Route
