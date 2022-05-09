@@ -21,6 +21,14 @@ export class JobsService extends baseService {
   bookingJob = (id) => {
     return this.patch(`/api/jobs/booking/${id}`);
   };
+
+  getJobsByUser = () => {
+    return this.get(`/api/jobs/by-user`);
+  };
+
+  jobDone = (id) => {
+    return this.patch(`/api/jobs/done/${id}`);
+  };
 }
 
 export const jobsService = new JobsService();
