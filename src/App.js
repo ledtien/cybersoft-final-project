@@ -13,6 +13,7 @@ import JobDetail from "./pages/JobDetail/JobDetail";
 import { UserTemplate } from "./templates/UserTemplate/UserTemplate";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import User from "./pages/User/User";
 
 export const history = createBrowserHistory();
 
@@ -37,6 +38,7 @@ function App() {
           />
 
           <JobsTemplate path="/jobs/:id" exact Component={JobDetail} />
+          <JobsTemplate path="/user/:id" exact Component={User} />
           <UserTemplate path="/auth/signup" exact Component={Register} />
           <UserTemplate path="/auth/signin" exact Component={Login} />
         </Switch>
