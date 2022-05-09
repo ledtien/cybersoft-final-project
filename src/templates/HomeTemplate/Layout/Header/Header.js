@@ -5,7 +5,7 @@ import { history } from "../../../../App";
 import { TOKEN, USER_LOGIN } from "../../../../utils/settings/config";
 import headerStyle from "./Header.module.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { AutoComplete, Input } from "antd";
+import { AutoComplete, Input, Popover } from "antd";
 import { Menu, Dropdown, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
@@ -22,7 +22,7 @@ export default function Header(props) {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const { userLogin } = useSelector((state) => state.UserReducer);
-  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
+  // const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
   console.log({ userLogin });
   const dispatch = useDispatch();
 
@@ -129,29 +129,51 @@ export default function Header(props) {
         >
           Order
         </NavLink>
-        <button
-          className={
-            navbar
-              ? `self-center py-px px-2 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
-              : `self-center py-px px-2 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-gray-400`
-          }
-          onClick={() =>
-            props.history.push(`/user/${userLocalStorage?.user?._id}`)
-          }
-        >
-          {userLocalStorage?.user?.name.substring(0, 1)}
-        </button>{" "}
-        {/* <button
-          className="rounded-sm border-gray-500 px-3 py-1 bg-slate-500 text-center text-white ml-5"
-          onClick={() => {
-            localStorage.removeItem(USER_LOGIN);
-            localStorage.removeItem(TOKEN);
-            history.push("/");
-            window.location.reload();
+
+        <Popover
+          placement="bottom"
+          title={userLogin?.name}
+          content={() => {
+            return (
+              <div className="flex flex-col  items-start w-full">
+                <button
+                  className="text-gray-500 text-sm font-semibold hover:text-green-500 pb-3 "
+                  onClick={() => props.history.push(`/user/${userLogin?._id}`)}
+                >
+                  Profile
+                </button>
+                <button className="text-gray-500 text-sm font-semibold hover:text-green-500 pb-3">
+                  Setting
+                </button>
+                <div className="w-full">
+                  <hr />
+                  <button
+                    className="text-gray-500 text-sm font-semibold hover:text-green-500 pt-3"
+                    onClick={() => {
+                      localStorage.removeItem(USER_LOGIN);
+                      localStorage.removeItem(TOKEN);
+                      history.push("/");
+                      window.location.reload();
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            );
           }}
+          trigger="click"
         >
-          LOG-OUT
-        </button> */}
+          <button
+            className={
+              navbar
+                ? `self-center w-10 h-10 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`
+                : `self-center w-10 h-10 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-gray-400`
+            }
+          >
+            {userLogin?.name.substring(0, 1)}
+          </button>
+        </Popover>
       </Fragment>
     );
   };
