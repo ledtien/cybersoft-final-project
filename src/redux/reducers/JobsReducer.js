@@ -2,6 +2,7 @@ import {
   GET_ALL_JOBS,
   GET_JOBS_BY_NAME,
   GET_JOBS_BY_SUB_TYPE,
+  GET_JOBS_BY_USER,
   GET_JOB_DETAIL,
   GET_TOTAL_PAGE_BY_SUB_TYPE,
 } from "../constants/JobsConstant";
@@ -11,6 +12,7 @@ const initialState = {
   jobsBySubType: [],
   total: 0,
   jobDetail: {},
+  jobsByUser: {},
 };
 
 export const JobsReducer = (state = initialState, { type, payload }) => {
@@ -35,6 +37,10 @@ export const JobsReducer = (state = initialState, { type, payload }) => {
 
     case GET_JOB_DETAIL: {
       return { ...state, jobDetail: payload };
+    }
+
+    case GET_JOBS_BY_USER: {
+      return { ...state, jobsByUser: payload };
     }
     default:
       return state;
