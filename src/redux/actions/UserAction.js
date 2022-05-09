@@ -2,6 +2,9 @@ import { history } from "../../App";
 import { userService } from "../../services/UserService";
 import { STATUS_CODE } from "../../utils/settings/config";
 import {
+  GET_USER_DETAIL,
+  UPDATE_USER,
+  UPLOAD_USER_IMAGE,
   USER_SIGN_IN_ACTION,
   USER_SIGN_UP_ACTION,
 } from "../constants/UserConstant";
@@ -32,6 +35,56 @@ export const signInAction = (form) => {
         await dispatch({ type: USER_SIGN_IN_ACTION, payload: result.data });
 
         history.goBack();
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const updateUserAction = (id, form) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await userService.updateUser(id, form);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result.data);
+        // dispatch({ type: UPDATE_USER, payload: result.data });
+        dispatch(signInAction(form));
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const getUserDetailAction = (id) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await userService.getUserDetail(id);
+      if (STATUS_CODE.SUCCESS) {
+        dispatch({ type: GET_USER_DETAIL, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const uploadUserImageAction = (formData) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await userService.uploadUserImage(formData);
+      if (STATUS_CODE.SUCCESS) {
+        dispatch({ type: UPLOAD_USER_IMAGE, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
