@@ -18,7 +18,7 @@ export const HomeTemplate = (props) => {
             <Header {...propsRoute} />
 
             <Component {...propsRoute} />
-            <hr className="mt-20" />
+            <hr className="" />
             <Footer />
           </>
         );
