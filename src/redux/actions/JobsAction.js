@@ -4,6 +4,7 @@ import {
   GET_ALL_JOBS,
   GET_JOBS_BY_NAME,
   GET_JOBS_BY_SUB_TYPE,
+  GET_JOBS_BY_USER,
   GET_JOB_DETAIL,
   GET_TOTAL_PAGE_BY_SUB_TYPE,
 } from "../constants/JobsConstant";
@@ -99,6 +100,41 @@ export const bookingJobAction = (id) => {
       if (STATUS_CODE.SUCCESS) {
         console.log(result);
         alert("Book job success!");
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const getJobsByUser = () => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await jobsService.getJobsByUser();
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        dispatch({ type: GET_JOBS_BY_USER, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const jobDoneAction = (id) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await jobsService.jobDone(id);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        alert("Job has been completed!");
+        await dispatch(getJobsByUser());
       }
     } catch (error) {
       console.log(error.response.data);
