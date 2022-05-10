@@ -24,7 +24,7 @@ export default function JobsHeader(props) {
   const [searchValue, setSearchValue] = useState("");
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const { userLogin } = useSelector((state) => state.UserReducer);
-  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
+
   useEffect(() => {
     dispatch(getTypeJobsAction());
   }, [dispatch]);
@@ -82,19 +82,7 @@ export default function JobsHeader(props) {
         </Fragment>
       );
     }
-    setTimeout(() => {
-      if (userLogin.avatar) {
-        return (
-          <img
-            src={userLogin?.name.substring(0, 1)}
-            alt="avatar"
-            className="relative bottom-px h-10 w-10 rounded-full dark:bg-coolGray-500 aspect-square"
-          />
-        );
-      } else {
-        userLogin?.name.substring(0, 1);
-      }
-    }, 2000);
+
     return (
       <Fragment>
         <NavLink
@@ -124,7 +112,7 @@ export default function JobsHeader(props) {
               <div className="flex flex-col  items-start w-full">
                 <button
                   className="text-gray-500 text-sm font-semibold hover:text-green-500 pb-3 "
-                  onClick={() => props.history.push(`/user/${userLogin?._id}`)}
+                  onClick={() => history.push(`/user/${userLogin?._id}`)}
                 >
                   Profile
                 </button>
@@ -227,15 +215,6 @@ export default function JobsHeader(props) {
           >
             Become a Seller
           </NavLink>
-          {/* <NavLink to="/" class="mr-5  text-gray-800">
-            Second Link
-          </NavLink>
-          <NavLink to="/" class="mr-5  text-gray-800">
-            Third Link
-          </NavLink>
-          <NavLink to="/" class="mr-5  text-gray-800">
-            Fourth Link
-          </NavLink> */}
         </nav>
         <div className="items-center flex-shrink-0 hidden lg:flex">
           {renderLogin()}
@@ -299,36 +278,6 @@ export default function JobsHeader(props) {
           })}
         </div>
       </div>
-
-      {/* <nav
-        className="w-full"
-        style={{
-          backgroundColor: "#f5f5f5",
-          borderBottom: "1px solid #dadbdd",
-        }}
-      >
-        <div className="container px-12 mx-auto flex justify-start items-center p-4">
-          <p className="text-sm font-bold m-0">Suggested:</p>
-          <div className="ml-3">
-            {jobsByName.slice(0, 4).map((job, index) => {
-              return (
-                <button
-                  onClick={() => {
-                    dispatch(getJobsByName(job.name));
-                    setTimeout(() => {
-                      history.push(`/jobs/search/by-name?name=${job.name}`);
-                    }, 1000);
-                  }}
-                  className="border-2 px-1 bg-white rounded-sm text-sm mr-2 hover:bg-gray-100 hover:border-gray-300"
-                  key={index}
-                >
-                  {job.name}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </nav> */}
     </header>
   );
 }
