@@ -20,6 +20,10 @@ export class UserService extends baseService {
   uploadUserImage = (formData) => {
     return this.post(`/api/users/upload-avatar`, formData);
   };
+
+  getAllUsers = () => {
+    return this.get(`/api/users`);
+  };
 }
 
 export const userService = new UserService();
