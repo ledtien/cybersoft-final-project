@@ -52,7 +52,6 @@ export const updateUserAction = (id, form) => {
       if (STATUS_CODE.SUCCESS) {
         console.log(result.data);
         // dispatch({ type: UPDATE_USER, payload: result.data });
-        dispatch(signInAction(form));
       }
     } catch (error) {
       console.log(error.response.data);
@@ -80,11 +79,11 @@ export const getUserDetailAction = (id) => {
 export const uploadUserImageAction = (formData) => {
   return async (dispatch) => {
     dispatch(displayLoadingAction());
-
     try {
       const result = await userService.uploadUserImage(formData);
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: UPLOAD_USER_IMAGE, payload: result.data });
+        console.log("loading", result);
+        await dispatch({ type: UPLOAD_USER_IMAGE, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
