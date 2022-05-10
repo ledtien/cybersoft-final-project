@@ -12,7 +12,7 @@ export const getTypeJobsAction = () => {
     try {
       const result = await typeJobsService.getTypeJobs();
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_TYPE_JOBS, payload: result.data });
+        await dispatch({ type: GET_TYPE_JOBS, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
@@ -28,7 +28,7 @@ export const getDetailTypeJobAction = (id) => {
     try {
       const result = await typeJobsService.getDetailTypeJob(id);
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_DETAIL_TYPE_JOB, payload: result.data });
+        await dispatch({ type: GET_DETAIL_TYPE_JOB, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);

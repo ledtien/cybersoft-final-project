@@ -7,7 +7,7 @@ export const getSubTypeJobsAction = () => {
     try {
       const result = await subTypeJobsService.getSubTypeJobs();
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_SUB_TYPE_JOBS, payload: result.data });
+        await dispatch({ type: GET_SUB_TYPE_JOBS, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
