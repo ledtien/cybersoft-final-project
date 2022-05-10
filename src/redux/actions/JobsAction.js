@@ -15,7 +15,7 @@ export const getJobsByName = (name) => {
     try {
       const result = await jobsService.getJobsByName(name);
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_JOBS_BY_NAME, payload: result.data });
+        await dispatch({ type: GET_JOBS_BY_NAME, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
@@ -30,7 +30,7 @@ export const getAllJobs = () => {
     try {
       const result = await jobsService.getAllJobs();
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_ALL_JOBS, payload: result.data });
+        await dispatch({ type: GET_ALL_JOBS, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
@@ -50,7 +50,7 @@ export const getJobsBySubType = (id, pageVisited, pageLimit) => {
         pageLimit
       );
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_JOBS_BY_SUB_TYPE, payload: result.data });
+        await dispatch({ type: GET_JOBS_BY_SUB_TYPE, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
@@ -68,7 +68,10 @@ export const getTotalPageBySubType = (id, pageVisited, pageLimit) => {
         pageLimit
       );
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_TOTAL_PAGE_BY_SUB_TYPE, payload: result.data });
+        await dispatch({
+          type: GET_TOTAL_PAGE_BY_SUB_TYPE,
+          payload: result.data,
+        });
       }
     } catch (error) {
       console.log(error.response.data);
@@ -82,7 +85,7 @@ export const getJobDetail = (id) => {
     try {
       const result = await jobsService.getJobDetail(id);
       if (STATUS_CODE.SUCCESS) {
-        dispatch({ type: GET_JOB_DETAIL, payload: result.data });
+        await dispatch({ type: GET_JOB_DETAIL, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
@@ -116,7 +119,7 @@ export const getJobsByUser = () => {
       const result = await jobsService.getJobsByUser();
       if (STATUS_CODE.SUCCESS) {
         console.log(result);
-        dispatch({ type: GET_JOBS_BY_USER, payload: result.data });
+        await dispatch({ type: GET_JOBS_BY_USER, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
