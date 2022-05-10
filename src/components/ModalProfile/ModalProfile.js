@@ -8,9 +8,6 @@ import {
   getUserDetailAction,
   updateUserAction,
 } from "../../redux/actions/UserAction";
-import { USER_LOGIN } from "../../utils/settings/config";
-import { isVisible } from "@testing-library/user-event/dist/utils";
-import { getJobsByUser } from "../../redux/actions/JobsAction";
 
 export default function ModalProfile({
   isModalVisible,
@@ -45,7 +42,6 @@ export default function ModalProfile({
       email: Yup.string().email("Invalid email format").required("Required!"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(updateUserAction(userLogin._id, values));
       dispatch(getUserDetailAction(userLogin._id));
       setIsModalVisible(false);
