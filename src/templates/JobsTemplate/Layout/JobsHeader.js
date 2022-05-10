@@ -24,8 +24,7 @@ export default function JobsHeader(props) {
   const [searchValue, setSearchValue] = useState("");
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const { userLogin } = useSelector((state) => state.UserReducer);
-  // const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
-
+  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
   useEffect(() => {
     dispatch(getTypeJobsAction());
   }, [dispatch]);
@@ -83,6 +82,19 @@ export default function JobsHeader(props) {
         </Fragment>
       );
     }
+    setTimeout(() => {
+      if (userLogin.avatar) {
+        return (
+          <img
+            src={userLogin?.name.substring(0, 1)}
+            alt="avatar"
+            className="relative bottom-px h-10 w-10 rounded-full dark:bg-coolGray-500 aspect-square"
+          />
+        );
+      } else {
+        userLogin?.name.substring(0, 1);
+      }
+    }, 2000);
     return (
       <Fragment>
         <NavLink
@@ -140,7 +152,6 @@ export default function JobsHeader(props) {
         >
           <button
             className={`self-center w-10 h-10 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`}
-            onClick={() => props.history.push(`/user/${userLogin?._id}`)}
           >
             {userLogin?.name.substring(0, 1)}
           </button>

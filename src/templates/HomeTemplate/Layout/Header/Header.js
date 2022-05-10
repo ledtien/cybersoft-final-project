@@ -6,7 +6,7 @@ import { TOKEN, USER_LOGIN } from "../../../../utils/settings/config";
 import headerStyle from "./Header.module.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { AutoComplete, Input, Popover } from "antd";
-import { Menu, Dropdown, Space } from "antd";
+import { Menu, Dropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypeJobsAction } from "../../../../redux/actions/TypeJobsAction";
 import {
@@ -22,8 +22,7 @@ export default function Header(props) {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const { userLogin } = useSelector((state) => state.UserReducer);
-  // const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
-  console.log({ userLogin });
+  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -171,7 +170,15 @@ export default function Header(props) {
                 : `self-center w-10 h-10 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 text-base border-2 border-gray-400`
             }
           >
-            {userLogin?.name.substring(0, 1)}
+            {userLogin.avatar ? (
+              <img
+                src={userLogin.avatar}
+                alt="avatar"
+                className="relative bottom-px h-10 w-10 rounded-full dark:bg-coolGray-500 aspect-square"
+              />
+            ) : (
+              userLogin?.name.substring(0, 1)
+            )}
           </button>
         </Popover>
       </Fragment>
