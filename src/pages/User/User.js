@@ -42,19 +42,19 @@ export default function User() {
     setIsModalVisible(false);
   };
 
-  const handleChangeImage = (e) => {
+  const handleChangeImage = async (e) => {
     let file = e.target.files[0];
     let formData = new FormData();
     const reader = new FileReader();
+
     console.log({ file });
     if (file.size / 1024 / 1024 < 2) {
-      formData.append("avatar", e.target.files[0], e.target.files[0].name);
-      dispatch(uploadUserImageAction(formData));
-
       reader.readAsDataURL(file);
       reader.onload = (e) => {
         setAvatarImg(e.target.result); //hinh base64
       };
+      formData.append("avatar", file, file.name);
+      dispatch(uploadUserImageAction(formData));
     } else {
       alert("Image Error!!!");
     }
