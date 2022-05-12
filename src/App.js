@@ -14,6 +14,9 @@ import { UserTemplate } from "./templates/UserTemplate/UserTemplate";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import User from "./pages/User/User";
+import { AdminTemplate } from "./templates/AdminTemplate/AdminTemplate";
+import UsersManagement from "./pages/Admin/UsersManagement/UsersManagement";
+import { ProfileTemplate } from "./templates/ProfileTemplate/ProfileTemplate";
 
 export const history = createBrowserHistory();
 
@@ -38,9 +41,15 @@ function App() {
           />
 
           <JobsTemplate path="/jobs/:id" exact Component={JobDetail} />
-          <JobsTemplate path="/user/:id" exact Component={User} />
+          <ProfileTemplate path="/user/:id" exact Component={User} />
           <UserTemplate path="/auth/signup" exact Component={Register} />
           <UserTemplate path="/auth/signin" exact Component={Login} />
+          <AdminTemplate path="/admin" exact Component={UsersManagement} />
+          <AdminTemplate
+            path="/admin/users"
+            exact
+            Component={UsersManagement}
+          />
         </Switch>
       </Router>
     </div>
