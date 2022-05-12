@@ -1,7 +1,9 @@
 import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
 import {
+  DELETE_USER,
+  GET_ALL_USERS,
+  GET_USER_BY_NAME,
   GET_USER_DETAIL,
-  UPDATE_USER,
   UPLOAD_USER_IMAGE,
   USER_SIGN_IN_ACTION,
 } from "../constants/UserConstant";
@@ -14,6 +16,7 @@ if (localStorage.getItem(USER_LOGIN)) {
 
 const initialState = {
   userLogin: user,
+  allUsers: [],
 };
 
 export const UserReducer = (state = initialState, { type, payload }) => {
@@ -38,6 +41,21 @@ export const UserReducer = (state = initialState, { type, payload }) => {
     case UPLOAD_USER_IMAGE: {
       localStorage.setItem(USER_LOGIN, JSON.stringify(payload));
       return { ...state, userLogin: payload };
+    }
+
+    case GET_ALL_USERS: {
+      return { ...state, allUsers: payload };
+    }
+
+    case DELETE_USER: {
+      state.allUsers = [
+        ...state.allUsers.filter((user) => user._id !== payload._id),
+      ];
+      return { ...state };
+    }
+
+    case GET_USER_BY_NAME: {
+      return { ...state, allUsers: payload };
     }
     default:
       return state;
