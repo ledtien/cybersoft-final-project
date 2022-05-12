@@ -53,7 +53,10 @@ export class baseService {
     return Axios({
       url: `${DOMAIN}${url}`,
       method: "DELETE",
-      headers: { tokenByClass: TOKEN_BY_CLASS },
+      headers: {
+        token: `${localStorage.getItem(TOKEN)}`,
+        tokenByClass: TOKEN_BY_CLASS,
+      },
     });
   };
 
