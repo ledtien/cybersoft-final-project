@@ -24,6 +24,18 @@ export class UserService extends baseService {
   getAllUsers = () => {
     return this.get(`/api/users`);
   };
+
+  deleteUser = (id) => {
+    return this.delete(`/api/users/${id}`);
+  };
+
+  createUser = (user) => {
+    return this.post(`/api/users`, user);
+  };
+
+  getUserByName = (user = "") => {
+    return this.get(`/api/users/pagination-search?name=${user}`);
+  };
 }
 
 export const userService = new UserService();
