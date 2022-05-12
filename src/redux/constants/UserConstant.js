@@ -7,3 +7,9 @@ export const UPDATE_USER = "UPDATE_USER";
 export const GET_USER_DETAIL = "GET_USER_DETAIL";
 
 export const UPLOAD_USER_IMAGE = "UPLOAD_USER_IMAGE";
+
+export const GET_ALL_USERS = "GET_ALL_USERS";
+
+export const DELETE_USER = "DELETE_USER";
+
+export const GET_USER_BY_NAME = "GET_USER_BY_NAME";

@@ -2,6 +2,9 @@ import { history } from "../../App";
 import { userService } from "../../services/UserService";
 import { STATUS_CODE } from "../../utils/settings/config";
 import {
+  DELETE_USER,
+  GET_ALL_USERS,
+  GET_USER_BY_NAME,
   GET_USER_DETAIL,
   UPDATE_USER,
   UPLOAD_USER_IMAGE,
@@ -51,7 +54,7 @@ export const updateUserAction = (id, form) => {
       const result = await userService.updateUser(id, form);
       if (STATUS_CODE.SUCCESS) {
         console.log(result.data);
-        // dispatch({ type: UPDATE_USER, payload: result.data });
+        dispatch(getAllUsersAction());
       }
     } catch (error) {
       console.log(error.response.data);
@@ -82,8 +85,72 @@ export const uploadUserImageAction = (formData) => {
     try {
       const result = await userService.uploadUserImage(formData);
       if (STATUS_CODE.SUCCESS) {
-        console.log("loading", result);
-        await dispatch({ type: UPLOAD_USER_IMAGE, payload: result.data });
+        // await dispatch({ type: UPLOAD_USER_IMAGE, payload: result.data });
+        await dispatch(getUserDetailAction(result.data._id));
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const getAllUsersAction = () => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await userService.getAllUsers();
+      if (STATUS_CODE.SUCCESS) {
+        await dispatch({ type: GET_ALL_USERS, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const deleteUserAction = (id) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await userService.deleteUser(id);
+      if (STATUS_CODE.SUCCESS) {
+        console.log({ result });
+        await dispatch({ type: DELETE_USER, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const createUserAction = (user) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await userService.createUser(user);
+      if (STATUS_CODE.SUCCESS) {
+        console.log({ result });
+        alert("User created!");
+        dispatch(getAllUsersAction());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const getUserByNameAction = (user) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await userService.getUserByName(user);
+      if (STATUS_CODE.SUCCESS) {
+        console.log({ result });
+        dispatch({ type: GET_USER_BY_NAME, payload: result.data });
       }
     } catch (error) {
       console.log(error.response.data);
