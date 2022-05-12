@@ -141,7 +141,15 @@ export default function JobsHeader(props) {
           <button
             className={`self-center w-10 h-10 rounded-full font-semibold bg-gray-400 transition duration-200 ease-in hover:bg-green-600 hover:border-green-600 hover:text-white text-base border-2 border-green-600`}
           >
-            {userLogin?.name.substring(0, 1)}
+            {userLogin.avatar ? (
+              <img
+                src={userLogin.avatar}
+                alt={userLogin?.name.substring(0, 1)}
+                className="relative bottom-px h-10 w-10 rounded-full dark:bg-coolGray-500 aspect-square"
+              />
+            ) : (
+              userLogin?.name.substring(0, 1)
+            )}
           </button>
         </Popover>
       </Fragment>
