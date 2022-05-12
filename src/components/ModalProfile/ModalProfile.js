@@ -8,6 +8,7 @@ import {
   getUserDetailAction,
   updateUserAction,
 } from "../../redux/actions/UserAction";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ModalProfile({
   isModalVisible,
@@ -17,6 +18,7 @@ export default function ModalProfile({
   const { userLogin } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
   const [componentSize, setComponentSize] = useState("large");
+  const { id } = useParams();
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
@@ -42,8 +44,8 @@ export default function ModalProfile({
       email: Yup.string().email("Invalid email format").required("Required!"),
     }),
     onSubmit: (values) => {
-      dispatch(updateUserAction(userLogin._id, values));
-      dispatch(getUserDetailAction(userLogin._id));
+      dispatch(updateUserAction(id, values));
+      dispatch(getUserDetailAction(id));
       setIsModalVisible(false);
     },
   });
