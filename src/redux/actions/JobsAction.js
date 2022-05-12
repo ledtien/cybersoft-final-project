@@ -42,7 +42,6 @@ export const getAllJobs = () => {
 export const getJobsBySubType = (id, pageVisited, pageLimit) => {
   return async (dispatch) => {
     dispatch(displayLoadingAction());
-
     try {
       const result = await jobsService.getJobsBySubType(
         id,
@@ -97,7 +96,6 @@ export const getJobDetail = (id) => {
 export const bookingJobAction = (id) => {
   return async (dispatch) => {
     dispatch(displayLoadingAction());
-
     try {
       const result = await jobsService.bookingJob(id);
       if (STATUS_CODE.SUCCESS) {
@@ -114,7 +112,6 @@ export const bookingJobAction = (id) => {
 export const getJobsByUser = () => {
   return async (dispatch) => {
     dispatch(displayLoadingAction());
-
     try {
       const result = await jobsService.getJobsByUser();
       if (STATUS_CODE.SUCCESS) {
@@ -131,7 +128,6 @@ export const getJobsByUser = () => {
 export const jobDoneAction = (id) => {
   return async (dispatch) => {
     dispatch(displayLoadingAction());
-
     try {
       const result = await jobsService.jobDone(id);
       if (STATUS_CODE.SUCCESS) {
