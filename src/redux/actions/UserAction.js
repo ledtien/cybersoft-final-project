@@ -6,8 +6,6 @@ import {
   GET_ALL_USERS,
   GET_USER_BY_NAME,
   GET_USER_DETAIL,
-  UPDATE_USER,
-  UPLOAD_USER_IMAGE,
   USER_SIGN_IN_ACTION,
   USER_SIGN_UP_ACTION,
 } from "../constants/UserConstant";

@@ -3,7 +3,6 @@ import { Input, Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUserAction,
-  getAllUsersAction,
   getUserByNameAction,
 } from "../../../redux/actions/UserAction";
 import UsersDrawer from "./UsersDrawer/UsersDrawer";
