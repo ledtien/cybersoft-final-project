@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  DatePicker,
-  InputNumber,
-  Switch,
-  Select,
-} from "antd";
+import { Form, Input, Button, DatePicker, Switch, Select } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
 import { useDispatch } from "react-redux";

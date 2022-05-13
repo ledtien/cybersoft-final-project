@@ -5,7 +5,6 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Input, AutoComplete } from "antd";
 import { getJobsByName } from "../../redux/actions/JobsAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { history } from "../../App";
 
 export default function HomeCarousel() {
@@ -17,8 +16,6 @@ export default function HomeCarousel() {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target;
-    // dispatch(getJobsByName(value));
-
     history.push(`/jobs/search/by-name?name=${value}`);
   };
 
@@ -36,7 +33,6 @@ export default function HomeCarousel() {
 
   const onSelect = (value, option) => {
     setSearchValue(option.label);
-    // dispatch(getJobsByName(option.label));
 
     history.push(`/jobs/search/by-name?name=${option.label}`);
   };
@@ -136,8 +132,6 @@ export default function HomeCarousel() {
                     </AutoComplete>
                     <button
                       onClick={() => {
-                        // dispatch(getJobsByName(searchValue));
-
                         history.push(
                           `/jobs/search/by-name?name=${searchValue}`
                         );

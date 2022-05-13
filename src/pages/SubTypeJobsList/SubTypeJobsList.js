@@ -15,7 +15,7 @@ export default function SubTypeJobsList() {
 
   useEffect(() => {
     dispatch(getDetailTypeJobAction(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   const handleShowModal = () => {
     setShowModal((prev) => !prev);
