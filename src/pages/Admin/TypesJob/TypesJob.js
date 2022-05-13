@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from "react";
-import { Input, Table } from "antd";
+import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import UsersDrawer from "./TypesJobDrawer/TypesJobDrawer";
 import CreateTypesJobModal from "./TypesJobModal/CreateTypesJobModal";
 import {
   deleteTypeJobAction,
   getTypeJobsAction,
 } from "../../../redux/actions/TypeJobsAction";
+import TypeJobsDrawer from "./TypesJobDrawer/TypesJobDrawer";
 
 export default function TypesJob() {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
@@ -17,8 +17,6 @@ export default function TypesJob() {
   }, [dispatch]);
 
   console.log(typeJobs);
-
-  const { Search } = Input;
 
   const columns = [
     {
@@ -77,7 +75,7 @@ export default function TypesJob() {
       render: (item, record, index) => {
         return (
           <Fragment key={index}>
-            <UsersDrawer record={record} />
+            <TypeJobsDrawer record={record} />
             <button
               className="border py-1 px-4 bg-red-500 text-white"
               onClick={() => {
