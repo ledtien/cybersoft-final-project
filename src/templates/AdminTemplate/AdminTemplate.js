@@ -1,13 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { NavLink, Redirect, Route } from "react-router-dom";
-import { Layout, Menu, Breadcrumb, Popover } from "antd";
-import { DesktopOutlined, FileOutlined, UserOutlined } from "@ant-design/icons";
+import { Layout, Menu, Popover } from "antd";
+import {
+  UserOutlined,
+  OrderedListOutlined,
+  SnippetsOutlined,
+  BookOutlined,
+} from "@ant-design/icons";
 import "./AdminTemplate.css";
-import SubMenu from "antd/lib/menu/SubMenu";
 import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
 import { useSelector } from "react-redux";
 import { history } from "../../App";
-import _ from "lodash";
 
 export const AdminTemplate = (props) => {
   const { Component, ...restProps } = props;
@@ -116,24 +119,18 @@ export const AdminTemplate = (props) => {
                 >
                   Fiverr Admin
                 </div>
-                <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+                <Menu theme="dark" mode="inline">
                   <Menu.Item key="1" icon={<UserOutlined />}>
                     <NavLink to="/admin/users">Users</NavLink>
                   </Menu.Item>
-                  <SubMenu
-                    key="sub1"
-                    icon={<FileOutlined />}
-                    title="Types of Job"
-                  >
-                    <Menu.Item key="10" icon={<FileOutlined />}>
-                      <NavLink to="/admin/typeJobs">Types of Job</NavLink>
-                    </Menu.Item>
-                    <Menu.Item key="11" icon={<FileOutlined />}>
-                      <NavLink to="/admin/films/subTypeJobs">Add new</NavLink>
-                    </Menu.Item>
-                  </SubMenu>
-                  <Menu.Item key="3" icon={<DesktopOutlined />}>
-                    <NavLink to="/admin/subTypeJobs">Sub Types of Job</NavLink>
+                  <Menu.Item key="2" icon={<OrderedListOutlined />}>
+                    <NavLink to="/admin/typesJob">Category</NavLink>
+                  </Menu.Item>
+                  <Menu.Item key="3" icon={<SnippetsOutlined />}>
+                    <NavLink to="/admin/subTypes">Sub Types</NavLink>
+                  </Menu.Item>
+                  <Menu.Item key="4" icon={<BookOutlined />}>
+                    <NavLink to="/admin/jobs">Jobs</NavLink>
                   </Menu.Item>
                 </Menu>
               </Sider>
