@@ -1,5 +1,6 @@
 import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
 import {
+  CHANGE_ACTIVE_KEY,
   DELETE_USER,
   GET_ALL_USERS,
   GET_USER_BY_NAME,
@@ -57,6 +58,7 @@ export const UserReducer = (state = initialState, { type, payload }) => {
     case GET_USER_BY_NAME: {
       return { ...state, allUsers: payload };
     }
+
     default:
       return state;
   }
