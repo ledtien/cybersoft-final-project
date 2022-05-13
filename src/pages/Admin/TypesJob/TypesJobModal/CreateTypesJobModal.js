@@ -35,7 +35,6 @@ export default function CreateTypesJobModal() {
       name: Yup.string().min(2, "Mininum 2 characters").required("Required!"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(createTypeJobAction(values));
     },
   });
