@@ -10,7 +10,7 @@ import {
 } from "../constants/JobsConstant";
 import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
-export const getJobsByName = (name) => {
+export const getJobsByName = (name = "") => {
   return async (dispatch) => {
     try {
       const result = await jobsService.getJobsByName(name);
@@ -134,6 +134,73 @@ export const jobDoneAction = (id) => {
         console.log(result);
         alert("Job has been completed!");
         await dispatch(getJobsByUser());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const createJobAction = (data) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await jobsService.createJob(data);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        alert("Job has been created!");
+        await dispatch(getJobsByName());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const deleteJobAction = (id) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await jobsService.deleteJob(id);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        alert("Job has been Deleted!");
+        await dispatch(getJobsByName());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const updateJobAction = (id, data) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await jobsService.updateJob(id, data);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        alert("Update Success!");
+        await dispatch(getJobsByName());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const uploadImageJobAction = (id, formData) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await jobsService.uploadImageJob(id, formData);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        await dispatch(getJobsByName());
       }
     } catch (error) {
       console.log(error.response.data);
