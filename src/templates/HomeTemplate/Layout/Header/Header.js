@@ -22,7 +22,7 @@ export default function Header(props) {
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
   const { jobsByName } = useSelector((state) => state.JobsReducer);
   const { userLogin } = useSelector((state) => state.UserReducer);
-  const userLocalStorage = JSON.parse(localStorage.getItem(USER_LOGIN));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -263,15 +263,6 @@ export default function Header(props) {
           >
             Become a Seller
           </NavLink>
-          {/* <NavLink to="/" class="mr-5  text-gray-800">
-            Second Link
-          </NavLink>
-          <NavLink to="/" class="mr-5  text-gray-800">
-            Third Link
-          </NavLink>
-          <NavLink to="/" class="mr-5  text-gray-800">
-            Fourth Link
-          </NavLink> */}
         </nav>
         <div className="items-center flex-shrink-0 hidden lg:flex">
           {renderLogin()}
