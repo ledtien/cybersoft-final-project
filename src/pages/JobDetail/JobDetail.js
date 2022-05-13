@@ -37,7 +37,7 @@ export default function JobDetail() {
   useEffect(() => {
     dispatch(getJobDetail(id));
     dispatch(getCommentsByJobAction(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   const { TabPane } = Tabs;
   const { Panel } = Collapse;

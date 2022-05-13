@@ -3,7 +3,6 @@ import { Modal, Button, Form, Select, Switch, Input, DatePicker } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
 import * as Yup from "yup";
-import _ from "lodash";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { createUserAction } from "../../../../redux/actions/UserAction";

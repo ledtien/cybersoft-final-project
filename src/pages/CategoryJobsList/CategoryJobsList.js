@@ -11,7 +11,6 @@ import {
   getJobsBySubType,
   getTotalPageBySubType,
 } from "../../redux/actions/JobsAction";
-import _ from "lodash";
 import { history } from "../../App";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -31,7 +30,7 @@ export default function CategoryJobsList(props) {
 
   useEffect(() => {
     dispatch(getTotalPageBySubType(searchString.subType));
-  }, [searchString.subType]);
+  }, [dispatch, searchString.subType]);
 
   const handlePageChange = (page, pageSize) => {
     if (page <= 1) {

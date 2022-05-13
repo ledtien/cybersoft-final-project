@@ -14,7 +14,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import {
-  getSubTypeJobsAction,
   updateSubTypeJobAction,
   uploadImageSubTypeJobAction,
 } from "../../../../redux/actions/SubTypeJobsAction";
@@ -24,13 +23,11 @@ export default function SubTypesJobDrawer(props) {
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
   const [componentSize, setComponentSize] = useState("large");
   const [avatarImg, setAvatarImg] = useState(null);
-  const { subTypeJobs } = useSelector((state) => state.SubTypeJobsReducer);
   const { typeJobs } = useSelector((state) => state.TypeJobsReducer);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getSubTypeJobsAction());
     dispatch(getTypeJobsAction());
   }, [dispatch]);
 

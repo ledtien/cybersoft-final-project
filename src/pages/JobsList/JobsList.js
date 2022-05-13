@@ -8,9 +8,6 @@ import {
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllJobs, getJobsByName } from "../../redux/actions/JobsAction";
-import _ from "lodash";
-import { ConsoleLogger } from "@microsoft/signalr/dist/esm/Utils";
-import { render } from "@testing-library/react";
 import { history } from "../../App";
 
 export default function JobsList(props) {
@@ -28,7 +25,7 @@ export default function JobsList(props) {
     } else {
       dispatch(getAllJobs());
     }
-  }, [dispatch]);
+  }, [dispatch, nameSearch]);
 
   const handlePageChange = (page, pageSize) => {
     setPage(page);

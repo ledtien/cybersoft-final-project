@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTypeJobAction } from "../../../redux/actions/TypeJobsAction";
 import {
   deleteSubTypeJobAction,
   getSubTypeJobsAction,
