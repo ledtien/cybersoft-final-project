@@ -51,9 +51,9 @@ export default function UsersManagement() {
       sortDirections: ["descend"],
     },
     {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
+      title: "Avatar",
+      dataIndex: "avatar",
+      key: "avatar",
       render: (item, record, index) => {
         return (
           <Fragment key={index}>
