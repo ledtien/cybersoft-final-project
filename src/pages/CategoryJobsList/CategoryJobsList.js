@@ -44,8 +44,6 @@ export default function CategoryJobsList(props) {
     }
   };
 
-  console.log({ jobsBySubType });
-
   const renderCard = () => {
     return jobsBySubType.slice(0, 12).map((job, index) => {
       return (

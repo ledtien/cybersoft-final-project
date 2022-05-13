@@ -34,8 +34,6 @@ export default function SubTypesJobDrawer(props) {
     dispatch(getTypeJobsAction());
   }, [dispatch]);
 
-  console.log(subTypeJobs);
-
   const { record } = props;
   const data = record.typeJob?._id;
 
@@ -56,7 +54,6 @@ export default function SubTypesJobDrawer(props) {
       name: Yup.string().min(2, "Mininum 2 characters").required("Required!"),
     }),
     onSubmit: (values) => {
-      console.log("values", values);
       dispatch(updateSubTypeJobAction(record._id, values));
     },
   });
@@ -97,7 +94,6 @@ export default function SubTypesJobDrawer(props) {
     let formData = new FormData();
     const reader = new FileReader();
 
-    console.log({ file });
     if (file.size / 1024 / 1024 < 2) {
       reader.readAsDataURL(file);
       reader.onload = (e) => {

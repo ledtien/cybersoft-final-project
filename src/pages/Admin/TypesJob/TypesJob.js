@@ -16,8 +16,6 @@ export default function TypesJob() {
     dispatch(getTypeJobsAction());
   }, [dispatch]);
 
-  console.log(typeJobs);
-
   const columns = [
     {
       title: "#ID",

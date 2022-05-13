@@ -64,7 +64,7 @@ export default function CreateSubTypesJobModal() {
         Add New Sub
       </button>
       <Modal
-        title="Create User"
+        title="Create New Sub"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -102,7 +102,7 @@ export default function CreateSubTypesJobModal() {
             valuePropName="checked"
             className="font-semibold"
           >
-            <Switch onChange={onChangeStatus} />
+            <Switch onChange={onChangeStatus} defaultChecked={false} />
           </Form.Item>
 
           <Form.Item label="Category" className="font-semibold ">
@@ -110,7 +110,6 @@ export default function CreateSubTypesJobModal() {
               style={{ width: "100%" }}
               onChange={handleChangeTypeJob}
               value={formik.values.subTypeJobs}
-              // select call api get all sub api to select change subtypejob
             >
               {typeJobs?.map((job, index) => {
                 return (

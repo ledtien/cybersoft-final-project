@@ -28,8 +28,6 @@ export default function User() {
     dispatch(getJobsByUser());
   }, [dispatch]);
 
-  console.log({ userLogin });
-
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -47,7 +45,6 @@ export default function User() {
     let formData = new FormData();
     const reader = new FileReader();
 
-    console.log({ file });
     if (file.size / 1024 / 1024 < 2) {
       reader.readAsDataURL(file);
       reader.onload = (e) => {

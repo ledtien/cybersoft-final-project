@@ -107,7 +107,7 @@ export default function UsersDrawer(props) {
         onClose={onClose}
         visible={state.visible}
       >
-        <p className="text-xl text-gray-700 font-bold">Personal</p>
+        <p className="text-xl text-gray-700 font-bold">{record.name}</p>
 
         <img
           src={record.avatar ? record.avatar : record.name}

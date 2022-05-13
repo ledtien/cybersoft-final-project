@@ -17,7 +17,6 @@ export default function JobsList(props) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
   const { jobsByName } = useSelector((state) => state.JobsReducer);
-  console.log(jobsByName);
   const dispatch = useDispatch();
   let stringSearch = props.location.search.substring(6);
   let nameSearch = stringSearch.replaceAll("%20", " ");

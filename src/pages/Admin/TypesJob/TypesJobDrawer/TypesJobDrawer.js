@@ -48,7 +48,6 @@ export default function TypeJobsDrawer(props) {
       name: Yup.string().min(2, "Mininum 2 characters").required("Required!"),
     }),
     onSubmit: (values) => {
-      console.log("values", values);
       dispatch(updateTypeJobAction(record._id, values));
     },
   });

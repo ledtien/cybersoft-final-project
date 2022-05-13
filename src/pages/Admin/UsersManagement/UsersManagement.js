@@ -17,16 +17,13 @@ export default function UsersManagement() {
     dispatch(getUserByNameAction());
   }, [dispatch]);
 
-  console.log(allUsers);
-
   const { Search } = Input;
 
   const onSearch = (value) => {
-    console.log(value);
+    dispatch(getUserByNameAction(value));
   };
   const handleChangeSearch = (e) => {
     let { value } = e.target;
-    console.log(value);
     if (searchRef.current) {
       clearTimeout(searchRef.current);
     }

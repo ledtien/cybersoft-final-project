@@ -34,7 +34,6 @@ export default function JobDetail() {
     id: "",
   });
 
-  console.log(comments);
   useEffect(() => {
     dispatch(getJobDetail(id));
     dispatch(getCommentsByJobAction(id));
@@ -42,7 +41,6 @@ export default function JobDetail() {
 
   const { TabPane } = Tabs;
   const { Panel } = Collapse;
-  console.log({ jobDetail });
   const { TextArea } = Input;
 
   const like = () => {
@@ -440,7 +438,6 @@ export default function JobDetail() {
                               content: state.value,
                               job: id,
                             };
-                            console.log(action);
                             dispatch(postCommentAction(action));
                             setState({ value: "" });
                           }}

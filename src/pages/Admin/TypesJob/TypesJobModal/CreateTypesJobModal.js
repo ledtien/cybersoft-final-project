@@ -49,10 +49,10 @@ export default function CreateTypesJobModal() {
         className="border p-1 mb-5 rounded-sm bg-green-500 text-white px-4 font-semibold hover:bg-green-600"
         onClick={showModal}
       >
-        Add New Type
+        Add New Category
       </button>
       <Modal
-        title="Create User"
+        title="Create New Category"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -90,7 +90,7 @@ export default function CreateTypesJobModal() {
             valuePropName="checked"
             className="font-semibold"
           >
-            <Switch onChange={onChangeStatus} />
+            <Switch onChange={onChangeStatus} defaultChecked={false} />
           </Form.Item>
 
           <Form.Item className="flex justify-center items-center mt-5">

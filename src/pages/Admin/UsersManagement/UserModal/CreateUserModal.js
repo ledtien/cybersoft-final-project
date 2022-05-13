@@ -53,14 +53,12 @@ export default function CreateUserModal() {
         .required("Required!"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(createUserAction(values));
     },
   });
 
   const handleChangeDatePicker = (value) => {
     let birthday = moment(value).format("YYYY/MM/DD");
-    console.log({ birthday });
     formik.setFieldValue("birthday", birthday);
   };
 
@@ -157,7 +155,7 @@ export default function CreateUserModal() {
             valuePropName="checked"
             className="font-semibold"
           >
-            <Switch onChange={onChangeGender} />
+            <Switch onChange={onChangeGender} defaultChecked={false} />
           </Form.Item>
 
           <Form.Item label="Skills" className="font-semibold ">
