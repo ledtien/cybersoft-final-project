@@ -36,3 +36,53 @@ export const getDetailTypeJobAction = (id) => {
     dispatch(hideLoadingAction());
   };
 };
+
+export const createTypeJobAction = (data) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await typeJobsService.createTypeJob(data);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        await dispatch(getTypeJobsAction());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const deleteTypeJobAction = (id) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+
+    try {
+      const result = await typeJobsService.deleteTypeJob(id);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        await dispatch(getTypeJobsAction());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
+
+export const updateTypeJobAction = (id, data) => {
+  return async (dispatch) => {
+    dispatch(displayLoadingAction());
+    try {
+      const result = await typeJobsService.updateTypeJob(id, data);
+      if (STATUS_CODE.SUCCESS) {
+        console.log(result);
+        await dispatch(getTypeJobsAction());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    dispatch(hideLoadingAction());
+  };
+};
