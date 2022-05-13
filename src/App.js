@@ -18,6 +18,8 @@ import { AdminTemplate } from "./templates/AdminTemplate/AdminTemplate";
 import UsersManagement from "./pages/Admin/UsersManagement/UsersManagement";
 import { ProfileTemplate } from "./templates/ProfileTemplate/ProfileTemplate";
 import TypesJob from "./pages/Admin/TypesJob/TypesJob";
+import SubTypesJob from "./pages/Admin/SubTypesJob/SubTypesJob";
+import Jobs from "./pages/Admin/Jobs/Jobs";
 
 export const history = createBrowserHistory();
 
@@ -52,6 +54,8 @@ function App() {
             Component={UsersManagement}
           />
           <AdminTemplate path="/admin/typesJob" exact Component={TypesJob} />
+          <AdminTemplate path="/admin/subTypes" exact Component={SubTypesJob} />
+          <AdminTemplate path="/admin/jobs" exact Component={Jobs} />
         </Switch>
       </Router>
     </div>
