@@ -18,17 +18,11 @@ import { useDispatch } from "react-redux";
 import { getSubTypeJobsAction } from "../../../../redux/actions/SubTypeJobsAction";
 import { updateTypeJobAction } from "../../../../redux/actions/TypeJobsAction";
 
-export default function UsersDrawer(props) {
+export default function TypeJobsDrawer(props) {
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
   const [componentSize, setComponentSize] = useState("large");
   const { subTypeJobs } = useSelector((state) => state.SubTypeJobsReducer);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getSubTypeJobsAction());
-  }, [dispatch]);
-
-  console.log(subTypeJobs);
 
   const { record } = props;
   const data = record.subTypeJobs?.map((sub, index) => {
@@ -92,7 +86,13 @@ export default function UsersDrawer(props) {
 
   return (
     <>
-      <Button type="primary mr-3" onClick={showDrawer}>
+      <Button
+        type="primary mr-3"
+        onClick={() => {
+          dispatch(getSubTypeJobsAction());
+          showDrawer();
+        }}
+      >
         Detail
       </Button>
       <Drawer
@@ -120,7 +120,7 @@ export default function UsersDrawer(props) {
           Update Category
         </Button>
         <Drawer
-          title="Update User"
+          title="Update Category"
           width={700}
           closable={false}
           onClose={onChildrenDrawerClose}
