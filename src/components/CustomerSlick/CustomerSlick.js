@@ -37,41 +37,15 @@ export default function CustomerSlick() {
     initialSlide: 0,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (
-    <div className="py-24" style={{ backgroundColor: "#f5f5f5" }}>
-      <div className="container px-12 mx-auto  ">
+    <div className="lg:py-24 py-16" style={{ backgroundColor: "#f5f5f5" }}>
+      <div className="container sm:px-0 lg:px-12 mx-auto  ">
         <Slider {...settings}>
           <div>
-            <div className="grid grid-cols-2 items-center">
-              <div className="p-10">
+            <div className="grid lg:grid-cols-2 items-center">
+              <div className="lg:p-10">
                 <YoutubeEmbed embedId="QYjP0-hlESI" />
               </div>
               <div className="p-5">
@@ -107,8 +81,8 @@ export default function CustomerSlick() {
             </div>
           </div>
           <div>
-            <div className="grid grid-cols-2 items-center">
-              <div className="p-10">
+            <div className="grid lg:grid-cols-2 items-center">
+              <div className="lg:p-10">
                 <YoutubeEmbed embedId="o1B6v1VWxG4" />
               </div>
               <div className="p-5">
@@ -143,8 +117,8 @@ export default function CustomerSlick() {
             </div>
           </div>
           <div>
-            <div className="grid grid-cols-2 items-center">
-              <div className="p-10">
+            <div className="grid lg:grid-cols-2 items-center">
+              <div className="lg:p-10">
                 <YoutubeEmbed embedId="WCbBS0P1nm4" />
               </div>
               <div className="p-5">
@@ -180,8 +154,8 @@ export default function CustomerSlick() {
             </div>
           </div>
           <div>
-            <div className="grid grid-cols-2 items-center">
-              <div className="p-10">
+            <div className="grid lg:grid-cols-2 items-center">
+              <div className="lg:p-10">
                 <YoutubeEmbed embedId="ImFyCi36NqU" />
               </div>
               <div className="p-5">
