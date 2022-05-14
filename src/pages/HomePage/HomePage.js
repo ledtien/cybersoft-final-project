@@ -12,41 +12,41 @@ export default function HomePage() {
       <HomeCarousel />
       <div className="bg-gray-100 ">
         <div
-          className="flex justify-center items-center px-12 container mx-auto"
+          className="flex justify-center items-center lg:px-12 container sm:px-0 mx-auto"
           style={{ height: "95px" }}
         >
           <div className="flex justify-center items-center mt-2">
-            <h1 className="text-gray-400 font-bold text-base pr-10">
+            <h1 className="text-gray-400 font-bold text-base pr-10 hidden lg:block">
               Trusted by:
             </h1>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 px-10 lg:px-0">
             <ul className="flex justify-center items-center">
-              <li className="pr-14">
+              <li className="lg:pr-14 pr-8">
                 <img
                   src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/facebook.31d5f92.png"
                   alt="facebook"
                 />
               </li>
-              <li className="pr-14">
+              <li className="lg:pr-14 pr-8">
                 <img
                   src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/google.517da09.png"
                   alt="Google"
                 />
               </li>
-              <li className="pr-14">
+              <li className="lg:pr-14 pr-8">
                 <img
                   src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/netflix.e3ad953.png"
                   alt="NETFLIX"
                 />
               </li>
-              <li className="pr-14">
+              <li className="lg:pr-14 pr-8">
                 <img
                   src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/pandg.8b7310b.png"
                   alt="P&amp;G"
                 />
               </li>
-              <li>
+              <li className="hidden sm:block">
                 <img
                   src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/paypal.ec56157.png"
                   alt="PayPal"
@@ -57,9 +57,9 @@ export default function HomePage() {
         </div>
       </div>
       <CategorySlick />
-      <div style={{ backgroundColor: "#f1fdf7" }} className="py-24">
-        <div className="grid grid-cols-2 px-12 container mx-auto items-center">
-          <div className=" pr-40">
+      <div style={{ backgroundColor: "#f1fdf7" }} className="lg:py-24 py-16">
+        <div className="lg:grid lg:grid-cols-2 lg:px-12 container sm:px-0 mx-auto items-center">
+          <div className=" lg:pr-40">
             <h1 className="font-bold text-3xl text-gray-700 mb-7">
               {" "}
               A whole world of freelance talent at your fingertips
