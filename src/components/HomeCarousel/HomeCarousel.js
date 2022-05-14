@@ -84,132 +84,199 @@ export default function HomeCarousel() {
   };
 
   return (
-    <Carousel autoplay effect="fade">
-      {heroImg.map((hero, index) => {
-        return (
-          <div key={index} style={{ maxHeight: "680px" }}>
-            <div
-              style={{
-                ...contentStyle,
-                backgroundImage: `url(${hero.heroImg})`,
-              }}
-            >
-              <div className="container px-12 mx-auto h-full pb-10 relative">
-                <div
-                  style={{ maxWidth: "650px", height: "100%" }}
-                  className="flex flex-col justify-center"
-                >
-                  <div>
-                    <h1
-                      className="text-5xl text-white"
-                      style={{ lineHeight: "56px", fontWeight: "700" }}
-                    >
-                      Find the perfect <i>freelance</i> services for your
-                      business
-                    </h1>
-                  </div>
+    <div>
+      <div style={{ backgroundColor: "#023a15" }} className="lg:hidden py-8">
+        <div className="container lg:px-12 sm:px-0 mx-auto h-full pb-10 relative">
+          <div
+            style={{ maxWidth: "650px", height: "100%" }}
+            className="flex flex-col justify-center"
+          >
+            <div className="pt-10">
+              <h1
+                className="text-4xl text-white"
+                style={{ lineHeight: "56px", fontWeight: "700" }}
+              >
+                Find the perfect <i>freelance</i> services for your business
+              </h1>
+            </div>
 
-                  <div>
-                    <AutoComplete
-                      style={{ width: "80%" }}
-                      options={options}
-                      onSelect={onSelect}
-                      onSearch={handleSearch}
-                      onChange={(text) => {
-                        setSearchValue(text);
-                      }}
-                      value={searchValue}
-                    >
-                      <Input
-                        style={{
-                          width: "100%",
-                        }}
-                        size="large"
-                        placeholder={`Try "building mobile app"`}
-                        prefix={<SearchOutlined className="ml-5" />}
-                        onPressEnter={handleSearchSubmit}
-                      />
-                    </AutoComplete>
-                    <button
-                      onClick={() => {
-                        history.push(
-                          `/jobs/search/by-name?name=${searchValue}`
-                        );
-                      }}
-                      className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600"
-                      style={{ padding: "6px 20px" }}
-                    >
-                      Search
-                    </button>
-                  </div>
-
-                  <div className="pt-6 text-sm ">
-                    <p className="font-semibold">
-                      Popular:{" "}
-                      <button
-                        className="font-semibold ml-2 mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
-                        style={{ border: "1px solid #fff", fontSize: "14px" }}
-                        onClick={() => {
-                          history.push(
-                            `/jobs/category/${`Website Design`}?subType=6198742faef344001cecfb3b&skip=0&limit=10`
-                          );
-                        }}
-                      >
-                        Website Design
-                      </button>
-                      <button
-                        className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
-                        style={{ border: "1px solid #fff", fontSize: "14px" }}
-                        onClick={() => {
-                          history.push(
-                            `/jobs/category/${` WordPress`}?subType=6198742baef344001cecfb37&skip=0&limit=10`
-                          );
-                        }}
-                      >
-                        WordPress
-                      </button>
-                      <button
-                        className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
-                        style={{ border: "1px solid #fff", fontSize: "14px" }}
-                        onClick={() => {
-                          history.push(
-                            `/jobs/category/${` Logo Design`}?subType=619874a4aef344001cecfb99&skip=0&limit=10`
-                          );
-                        }}
-                      >
-                        Logo Design
-                      </button>
-                      <button
-                        className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
-                        style={{ border: "1px solid #fff", fontSize: "14px" }}
-                        onClick={() => {
-                          history.push(
-                            `/jobs/category/${` NFT Art`}?subType=61987435aef344001cecfb3f&skip=0&limit=10`
-                          );
-                        }}
-                      >
-                        NFT Art
-                      </button>
-                    </p>
-                  </div>
-                </div>
-                <div className="text-lg absolute bottom-7 right-7">
-                  {hero.heroName === "Gabrielle" ? (
-                    <img
-                      src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/five_stars.e5c37f5.svg"
-                      alt="star"
-                    />
-                  ) : (
-                    ""
-                  )}
-                  <p className="text-white inline">{hero.heroName}, </p>
-                  <b>{hero.heroJob}</b>
-                </div>
-              </div>
+            <div>
+              <AutoComplete
+                style={{ width: "100%" }}
+                options={options}
+                onSelect={onSelect}
+                onSearch={handleSearch}
+                onChange={(text) => {
+                  setSearchValue(text);
+                }}
+                value={searchValue}
+              >
+                <Input
+                  style={{
+                    width: "100%",
+                  }}
+                  size="large"
+                  placeholder={`Try "building mobile app"`}
+                  prefix={<SearchOutlined className="ml-5" />}
+                  onPressEnter={handleSearchSubmit}
+                />
+              </AutoComplete>
+              <button
+                onClick={() => {
+                  history.push(`/jobs/search/by-name?name=${searchValue}`);
+                }}
+                className="bg-green-500 text-lg transition duration-150 ease-in hover:bg-green-600 w-full mt-2 text-white "
+                style={{ padding: "6px 20px" }}
+              >
+                Search
+              </button>
             </div>
           </div>
-        );
-      })}
-    </Carousel>
+        </div>
+      </div>
+      <div className="lg:block hidden">
+        <Carousel autoplay effect="fade">
+          {heroImg.map((hero, index) => {
+            return (
+              <div key={index} style={{ maxHeight: "680px" }}>
+                <div
+                  style={{
+                    ...contentStyle,
+                    backgroundImage: `url(${hero.heroImg})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <div className="container px-12 mx-auto h-full pb-10 relative">
+                    <div
+                      style={{ maxWidth: "650px", height: "100%" }}
+                      className="flex flex-col justify-center"
+                    >
+                      <div>
+                        <h1
+                          className="text-5xl text-white"
+                          style={{ lineHeight: "56px", fontWeight: "700" }}
+                        >
+                          Find the perfect <i>freelance</i> services for your
+                          business
+                        </h1>
+                      </div>
+
+                      <div>
+                        <AutoComplete
+                          style={{ width: "80%" }}
+                          options={options}
+                          onSelect={onSelect}
+                          onSearch={handleSearch}
+                          onChange={(text) => {
+                            setSearchValue(text);
+                          }}
+                          value={searchValue}
+                        >
+                          <Input
+                            style={{
+                              width: "100%",
+                            }}
+                            size="large"
+                            placeholder={`Try "building mobile app"`}
+                            prefix={<SearchOutlined className="ml-5" />}
+                            onPressEnter={handleSearchSubmit}
+                          />
+                        </AutoComplete>
+                        <button
+                          onClick={() => {
+                            history.push(
+                              `/jobs/search/by-name?name=${searchValue}`
+                            );
+                          }}
+                          className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600"
+                          style={{ padding: "6px 20px" }}
+                        >
+                          Search
+                        </button>
+                      </div>
+
+                      <div className="pt-6 text-sm ">
+                        <p className="font-semibold">
+                          Popular:{" "}
+                          <button
+                            className="font-semibold ml-2 mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                            style={{
+                              border: "1px solid #fff",
+                              fontSize: "14px",
+                            }}
+                            onClick={() => {
+                              history.push(
+                                `/jobs/category/${`Website Design`}?subType=6198742faef344001cecfb3b&skip=0&limit=10`
+                              );
+                            }}
+                          >
+                            Website Design
+                          </button>
+                          <button
+                            className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                            style={{
+                              border: "1px solid #fff",
+                              fontSize: "14px",
+                            }}
+                            onClick={() => {
+                              history.push(
+                                `/jobs/category/${` WordPress`}?subType=6198742baef344001cecfb37&skip=0&limit=10`
+                              );
+                            }}
+                          >
+                            WordPress
+                          </button>
+                          <button
+                            className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                            style={{
+                              border: "1px solid #fff",
+                              fontSize: "14px",
+                            }}
+                            onClick={() => {
+                              history.push(
+                                `/jobs/category/${` Logo Design`}?subType=619874a4aef344001cecfb99&skip=0&limit=10`
+                              );
+                            }}
+                          >
+                            Logo Design
+                          </button>
+                          <button
+                            className=" font-semibold mr-3 cursor-pointer rounded-full px-3 py-1 hover:bg-white hover:text-gray-700 transition duration-150 ease-in"
+                            style={{
+                              border: "1px solid #fff",
+                              fontSize: "14px",
+                            }}
+                            onClick={() => {
+                              history.push(
+                                `/jobs/category/${` NFT Art`}?subType=61987435aef344001cecfb3f&skip=0&limit=10`
+                              );
+                            }}
+                          >
+                            NFT Art
+                          </button>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-lg absolute bottom-7 right-7">
+                      {hero.heroName === "Gabrielle" ? (
+                        <img
+                          src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/five_stars.e5c37f5.svg"
+                          alt="star"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      <p className="text-white inline">{hero.heroName}, </p>
+                      <b>{hero.heroJob}</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
+    </div>
   );
 }
