@@ -4,10 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { AutoComplete, Input, Popover } from "antd";
 import { Menu, Dropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getDetailTypeJobAction,
-  getTypeJobsAction,
-} from "../../../redux/actions/TypeJobsAction";
+import { getTypeJobsAction } from "../../../redux/actions/TypeJobsAction";
 import headerStyle from "./JobsHeader.module.css";
 import { history } from "../../../App";
 import {
@@ -68,7 +65,7 @@ export default function JobsHeader(props) {
       return (
         <Fragment>
           <button
-            className="self-center py-3 mr-3 rounded  font-semibold hover:text-green-600 text-base"
+            className="self-center py-3 mr-3 rounded hidden sm:block font-semibold hover:text-green-600 text-base"
             onClick={() => props.history.push("/auth/signin")}
           >
             Sign in
@@ -85,24 +82,26 @@ export default function JobsHeader(props) {
 
     return (
       <Fragment>
-        <NavLink
-          to="/"
-          className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
-        >
-          Messages
-        </NavLink>
-        <NavLink
-          to="/"
-          className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
-        >
-          Lists
-        </NavLink>
-        <NavLink
-          to="/"
-          className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
-        >
-          Order
-        </NavLink>
+        <div className="hidden lg:block">
+          <NavLink
+            to="/"
+            className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
+          >
+            Messages
+          </NavLink>
+          <NavLink
+            to="/"
+            className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
+          >
+            Lists
+          </NavLink>
+          <NavLink
+            to="/"
+            className={`mr-5 font-semibold text-gray-400 hover:text-green-400 text-base`}
+          >
+            Order
+          </NavLink>
+        </div>
 
         <Popover
           placement="bottom"
@@ -158,7 +157,7 @@ export default function JobsHeader(props) {
 
   return (
     <header className={`${headerStyle.navbar} ${headerStyle.active} `}>
-      <div className="container flex justify-between h-20 px-12 mx-auto">
+      <div className="container flex justify-between h-20 lg:px-12 mx-auto">
         <a
           href="/"
           aria-label="Back to homepage"
@@ -210,13 +209,13 @@ export default function JobsHeader(props) {
                 history.push(`/jobs/search/by-name?name=${searchValue}`);
               }, 1500);
             }}
-            className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600 text-white"
+            className="bg-green-500 rounded-r-sm text-lg transition duration-150 ease-in hover:bg-green-600 text-white hidden md:block"
             style={{ padding: "2px 15px" }}
           >
             Search
           </button>
         </div>
-        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <nav className="md:ml-auto lg:flex flex-wrap items-center text-base justify-center hidden ">
           <NavLink
             to="/"
             className={`mr-5 font-semibold text-gray-600 hover:text-green-600 text-base`}
@@ -224,20 +223,18 @@ export default function JobsHeader(props) {
             Become a Seller
           </NavLink>
         </nav>
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          {renderLogin()}
-        </div>
+        <div className="items-center flex-shrink-0 flex">{renderLogin()}</div>
       </div>
 
       <div
-        className="bg-white w-full h-10 flex justify-center items-center transition-all duration-150 ease-in translate-y-0"
+        className="bg-white shadow-sm w-full h-10 lg:flex justify-center items-center transition-all duration-150 ease-in translate-y-0 hidden sm:block"
         style={{
           borderTop: "1px solid #e4e5e7",
-          borderBottom: "1px solid #dadbdd",
+          borderBottom: "1px solid #e4e5e7",
         }}
       >
-        <div className="container flex items-center px-12 mx-auto justify-between">
-          {typeJobs?.slice(3, 12).map((job, index) => {
+        <div className="container sm:px-0 lg:flex items-center lg:px-12 mx-auto justify-between xl:hidden hidden">
+          {typeJobs?.slice(3, 10).map((job, index) => {
             return (
               <div className={` ${headerStyle.secondNavbarLine}`} key={index}>
                 <Dropdown
@@ -255,7 +252,7 @@ export default function JobsHeader(props) {
                               key={index}
                               onClick={() => {
                                 history.push(
-                                  `/jobs/category/${job.name}?subType=${sub._id}`
+                                  `/jobs/category/${sub.name}?subType=${sub._id}`
                                 );
                                 dispatch(getJobsBySubType(sub._id, 0, 12));
                               }}
@@ -274,7 +271,150 @@ export default function JobsHeader(props) {
                       style={{ lineHeight: "inherit", cursor: "pointer" }}
                       onClick={() => {
                         history.push(`/type-jobs/${job._id}`);
-                        dispatch(getDetailTypeJobAction(job._id));
+                      }}
+                    >
+                      {job.name}
+                    </div>
+                  </div>
+                </Dropdown>
+              </div>
+            );
+          })}
+        </div>
+        <div className="container sm:px-0 xl:flex items-center lg:px-12 mx-auto justify-between hidden">
+          {typeJobs?.slice(3, 12).map((job, index) => {
+            return (
+              <div className={` ${headerStyle.secondNavbarLine}`} key={index}>
+                <Dropdown
+                  overlay={() => {
+                    return (
+                      <Menu
+                        style={{
+                          marginTop: "3px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {job.subTypeJobs.map((sub, index) => {
+                          return (
+                            <Menu.Item
+                              key={index}
+                              onClick={() => {
+                                history.push(
+                                  `/jobs/category/${sub.name}?subType=${sub._id}`
+                                );
+                                dispatch(getJobsBySubType(sub._id, 0, 12));
+                              }}
+                            >
+                              {sub.name}
+                            </Menu.Item>
+                          );
+                        })}
+                      </Menu>
+                    );
+                  }}
+                >
+                  <div className={``} onClick={(e) => e.preventDefault()}>
+                    <div
+                      className={`${headerStyle.secondNavbarLine}`}
+                      style={{ lineHeight: "inherit", cursor: "pointer" }}
+                      onClick={() => {
+                        history.push(`/type-jobs/${job._id}`);
+                      }}
+                    >
+                      {job.name}
+                    </div>
+                  </div>
+                </Dropdown>
+              </div>
+            );
+          })}
+        </div>
+        <div className="container sm:px-0 sm:hidden items-center h-full lg:px-12 mx-auto justify-between hidden md:flex lg:hidden">
+          {typeJobs?.slice(3, 8).map((job, index) => {
+            return (
+              <div className={` ${headerStyle.secondNavbarLine}`} key={index}>
+                <Dropdown
+                  overlay={() => {
+                    return (
+                      <Menu
+                        style={{
+                          marginTop: "3px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {job.subTypeJobs.map((sub, index) => {
+                          return (
+                            <Menu.Item
+                              key={index}
+                              onClick={() => {
+                                history.push(
+                                  `/jobs/category/${sub.name}?subType=${sub._id}`
+                                );
+                                dispatch(getJobsBySubType(sub._id, 0, 12));
+                              }}
+                            >
+                              {sub.name}
+                            </Menu.Item>
+                          );
+                        })}
+                      </Menu>
+                    );
+                  }}
+                >
+                  <div className={``} onClick={(e) => e.preventDefault()}>
+                    <div
+                      className={`${headerStyle.secondNavbarLine}`}
+                      style={{ lineHeight: "inherit", cursor: "pointer" }}
+                      onClick={() => {
+                        history.push(`/type-jobs/${job._id}`);
+                      }}
+                    >
+                      {job.name}
+                    </div>
+                  </div>
+                </Dropdown>
+              </div>
+            );
+          })}
+        </div>
+        <div className="container sm:px-0 sm:flex items-center h-full lg:px-12 mx-auto justify-between md:hidden lg:hidden">
+          {typeJobs?.slice(3, 7).map((job, index) => {
+            return (
+              <div className={` ${headerStyle.secondNavbarLine}`} key={index}>
+                <Dropdown
+                  overlay={() => {
+                    return (
+                      <Menu
+                        style={{
+                          marginTop: "3px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {job.subTypeJobs.map((sub, index) => {
+                          return (
+                            <Menu.Item
+                              key={index}
+                              onClick={() => {
+                                history.push(
+                                  `/jobs/category/${sub.name}?subType=${sub._id}`
+                                );
+                                dispatch(getJobsBySubType(sub._id, 0, 12));
+                              }}
+                            >
+                              {sub.name}
+                            </Menu.Item>
+                          );
+                        })}
+                      </Menu>
+                    );
+                  }}
+                >
+                  <div className={``} onClick={(e) => e.preventDefault()}>
+                    <div
+                      className={`${headerStyle.secondNavbarLine}`}
+                      style={{ lineHeight: "inherit", cursor: "pointer" }}
+                      onClick={() => {
+                        history.push(`/type-jobs/${job._id}`);
                       }}
                     >
                       {job.name}
