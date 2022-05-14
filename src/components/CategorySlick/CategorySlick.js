@@ -47,7 +47,16 @@ export default function CategorySlick() {
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1050,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -56,27 +65,29 @@ export default function CategorySlick() {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 640,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          infinite: true,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 550,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: true,
         },
       },
     ],
   };
 
   return (
-    <div className="py-24">
-      <div className="container px-12 mx-auto  ">
-        <h2 className="pb-12 text-3xl font-bold text-gray-700">
+    <div className="lg:py-24 py-16">
+      <div className="container sm:px-0 lg:px-12 mx-auto  ">
+        <h2 className="lg:pb-12 pb-5 lg:text-3xl text-2xl font-bold text-gray-700">
           {" "}
           Popular professional services{" "}
         </h2>
