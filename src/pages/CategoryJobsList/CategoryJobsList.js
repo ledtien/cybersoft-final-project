@@ -98,18 +98,16 @@ export default function CategoryJobsList(props) {
 
   return (
     <section>
-      <div className="container px-12 mx-auto">
-        <h1 className="text-4xl font-bold py-7"> {name}</h1>
+      <div className="container lg:px-12 mx-auto">
+        <h1 className="text-4xl font-bold pt-7"> {name}</h1>
       </div>
       <div
-        className="sticky top-0 h-20 z-10 bg-white"
+        className="sticky top-0 h-20 z-10 bg-white hidden md:block"
         style={{
           borderBottom: "1px solid rgba(0,0,0,0.1)",
-          // boxShadow:
-          //   " 0 .266px 1.13052px rgba(0,0,0,.069),0 .89345px 3.79717px rgba(0,0,0,.101),0 5px 17px rgba(0,0,0,.17",
         }}
       >
-        <div className="flex justify-between items-center container px-12 mx-auto ">
+        <div className="flex justify-between items-center container lg:px-12 mx-auto  ">
           <div>
             <button
               className="mr-2 text-gray-700 px-2 py-1 font-semibold"
@@ -176,7 +174,7 @@ export default function CategoryJobsList(props) {
           </div>
         </div>
       </div>
-      <div className="container px-12 mx-auto py-5">
+      <div className="container lg:px-12 mx-auto py-5">
         <div className=" flex justify-between items-center">
           <p className="text-gray-500 font-semibold text-sm">
             {jobsBySubType.length > 1
@@ -206,12 +204,14 @@ export default function CategoryJobsList(props) {
           </div>
         </div>
       </div>
-      <div className="container px-12 mx-auto">
+      <div className="container lg:px-12 mx-auto">
         <section className="text-gray-600 body-font">
-          <div className="grid grid-cols-4 gap-5">{renderCard()}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {renderCard()}
+          </div>
         </section>
       </div>
-      <div className="container px-12 mx-auto flex justify-center items-end mt-10">
+      <div className="container lg:px-12 mx-auto flex justify-center items-end mt-10">
         {" "}
         <Pagination
           defaultCurrent={1}
