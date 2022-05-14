@@ -9,8 +9,8 @@
 }
 
 .navbar.active {
-    background-color: #fff;
-    color: #62646a;
+    background-color: #fff !important;
+    color: #62646a !important;
     transition: background-color .5s ease;
 }
 
@@ -18,8 +18,8 @@
     fill: #404145;
 }
 
-.navbar g:first-of-type {
-    fill: #fff;
+.navbar.active svg rect {
+    fill: #404145;
 }
 
 .secondNavbarLine {
