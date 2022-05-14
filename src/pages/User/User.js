@@ -59,8 +59,8 @@ export default function User() {
 
   return (
     <div className="pt-10 pb-32 " style={{ backgroundColor: "#f7f7f7" }}>
-      <div className="container px-32 mx-auto">
-        <div className="grid grid-cols-5 gap-4">
+      <div className="container xl:px-32 mx-auto">
+        <div className="lg:grid lg:grid-cols-5 gap-4">
           <div className="col-span-2">
             <div className="flex flex-col justify-center max-w-md p-6 border bg-white sm:px-12 dark:bg-coolGray-900 dark:text-coolGray-100">
               <input
@@ -176,7 +176,8 @@ export default function User() {
             </div>
           </div>
           <div className="col-start-3 col-span-3">
-            <h3 className="text-center text-2xl font-bold">Booking jobs</h3>
+            <hr className="lg:hidden mt-10" />
+            <h3 className="text-center text-2xl font-bold ">Booking jobs</h3>
             <section className="text-gray-600 body-font overflow-hidden">
               <div className="container px-5 py-10 mx-auto">
                 <div className=" divide-y-2 divide-gray-100">
