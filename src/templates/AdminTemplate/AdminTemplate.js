@@ -18,6 +18,20 @@ export const AdminTemplate = (props) => {
   let [state, setState] = useState({ collapsed: false });
   const { userLogin } = useSelector((state) => state.UserReducer);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
+  if (!localStorage.getItem(USER_LOGIN)) {
+    alert("No Authentication for this page!!!");
+    return <Redirect to="/" />;
+  }
+
+  if (userLogin.role !== "ADMIN") {
+    alert("No Authentication for this page!!!");
+    return <Redirect to="/" />;
+  }
+
   const onCollapse = (collapsed) => {
     console.log(collapsed);
     setState({
@@ -81,19 +95,6 @@ export const AdminTemplate = (props) => {
       </Popover>
     </Fragment>
   );
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
-  if (!localStorage.getItem(USER_LOGIN)) {
-    alert("No Authentication for this page!!!");
-    return <Redirect to="/" />;
-  }
-
-  if (userLogin.role !== "ADMIN") {
-    alert("No Authentication for this page!!!");
-    return <Redirect to="/" />;
-  }
 
   return (
     <Route
